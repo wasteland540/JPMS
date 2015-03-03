@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 import jpms.callback.MessageCallBack;
 import jpms.messaging.ViewModelMessage;
 import jpms.view.IBasicView;
+import jpms.view.dialogs.DialogIcon;
+import jpms.view.dialogs.IBasicDialog;
 
 /**
  *
@@ -53,7 +55,37 @@ public abstract class AbstractBaseViewModel {
             dialogStage.setScene(scene);
             dialogStage.show();
         }
-    }   
+    }
+    
+    public void showDialog(Class<?> dialog, DialogIcon icon, String message, String stageKey){
+        IBasicDialog basicDialog = (IBasicDialog) jpms.JPMS.getInjector().getInstance(dialog);
+        basicDialog.setMessage(icon, message);
+        
+        Parent root = (Parent) basicDialog.getView();     
+        
+        //this is needed, because guice hold an instance of xyzView.class. so it had also one reference to a scene/stage.
+        //A root can only have one refernce to a scene/stage!
+        //we can reuse our view simple with the .show() method.
+        if(root.getScene() != null){
+            Stage dialogStage = jpms.JPMS.getStageMap().get(stageKey);
+            dialogStage.show();
+        }
+        else{
+            Scene scene = new Scene(root);
+                        
+            Stage dialogStage = new Stage();
+            //dialogStage.setTitle(windowTitle);
+            dialogStage.setResizable(false);
+            dialogStage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/images/icon.png")));
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(jpms.JPMS.getPrimaryStage());
+
+            jpms.JPMS.getStageMap().put(stageKey, dialogStage);
+
+            dialogStage.setScene(scene);
+            dialogStage.show();
+        }
+    }
     
     protected void sendMessage(String queueName, String msg) throws IOException{
         setupMessageConnection();

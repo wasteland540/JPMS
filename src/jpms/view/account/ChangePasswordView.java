@@ -9,7 +9,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.stage.Stage;
 import jpms.view.AbstractView;
 import jpms.view.IBasicView;
 import jpms.viewmodel.account.ChangePasswordViewModel;
@@ -35,6 +38,12 @@ public class ChangePasswordView extends AbstractView implements Initializable, I
     
     @FXML
     private PasswordField newPasswordField2;
+    
+    @FXML
+    private Button saveBtn;
+    
+    @FXML
+    private Label errorMsgLbl;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -48,16 +57,18 @@ public class ChangePasswordView extends AbstractView implements Initializable, I
 
     @Override
     public void payloadBindings() {
+        viewModel.oldPasswordProperty().bindBidirectional(oldPasswordField.textProperty());
+        viewModel.newPasswordProperty().bindBidirectional(newPasswordField.textProperty());
+        viewModel.newPassword2Property().bindBidirectional(newPasswordField2.textProperty());
         
+        errorMsgLbl.visibleProperty().bind(viewModel.isNewPasswordEqualProperty());
+        saveBtn.disableProperty().bind(viewModel.isNewPasswordEqualProperty());
         
         setupListeners();
     }
     
     @Override
-    protected void setupListeners() {
-        //oldPasswordTextChanged
-        //TODO:
-        
+    protected void setupListeners() {        
         //newPassword1TextChanged
         newPasswordField.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -77,7 +88,19 @@ public class ChangePasswordView extends AbstractView implements Initializable, I
     
     @FXML
     private void handleSaveBtnAction(ActionEvent event){
-        viewModel.save();
+        boolean changed = viewModel.save();
+        
+        if(changed){            
+            //clear field, for reuse
+            viewModel.reset();
+            
+            // close the dialog.
+            Stage stage  = (Stage) getView().getScene().getWindow();
+            stage.close();            
+        }
+        else {
+            viewModel.showWarnDialog();
+        }
     }
     
 }

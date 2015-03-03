@@ -9,6 +9,7 @@ import jpms.view.MainView;
 import jpms.view.account.ChangePasswordView;
 import jpms.view.account.DeleteUserView;
 import jpms.view.account.NewUserView;
+import jpms.view.dialogs.SimpleDialog;
 
 /**
  *
@@ -23,8 +24,11 @@ public class ViewModule extends AbstractModule {
         bind(NewUserView.class).toInstance((NewUserView) loadController("/jpms/fxml/account/NewUserView.fxml"));
         bind(DeleteUserView.class).toInstance((DeleteUserView) loadController("/jpms/fxml/account/DeleteUserView.fxml"));
         bind(ChangePasswordView.class).toInstance((ChangePasswordView) loadController("/jpms/fxml/account/ChangePasswordView.fxml"));
-        
         //TODO: bind all views
+        
+        //dialogs:
+        bind(SimpleDialog.class).toInstance((SimpleDialog) loadController("/jpms/fxml/dialogs/SimpleDialog.fxml"));
+        
     }
     
     protected Object loadController(String url){

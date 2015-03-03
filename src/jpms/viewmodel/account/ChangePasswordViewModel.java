@@ -7,43 +7,39 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import jpms.application.IAppInfo;
+import jpms.services.IUserService;
+import jpms.view.dialogs.DialogIcon;
+import jpms.view.dialogs.SimpleDialog;
+import jpms.viewmodel.AbstractBaseViewModel;
 
 /**
  *
  * @author m.elz
  */
 @Singleton
-public class ChangePasswordViewModel {
+public class ChangePasswordViewModel extends AbstractBaseViewModel {
+    
+    private final String warnDialogKey = "ChangePasswordViewModel.warnDialogKey";
     
     @Inject
     private IAppInfo appInfo;
     
+    @Inject
+    private IUserService userService;
+    
     private final StringProperty oldPassword = new SimpleStringProperty();
     private final StringProperty newPassword = new SimpleStringProperty();
     private final StringProperty newPassword2 = new SimpleStringProperty();
-    private final BooleanProperty isNewPasswordEqual = new SimpleBooleanProperty();
-    private final BooleanProperty isOldPasswordOk = new SimpleBooleanProperty();
+    private final BooleanProperty isNewPasswordEqual = new SimpleBooleanProperty(true);
 
- 
-    public void save(){
-        //TODO: userServie...
-        String loginname =appInfo.getLoginname();
+    public boolean save(){
+        String loginname = appInfo.getLoginname();
+        String oldPass = oldPassword.get();
+        String newPass = newPassword.get();
         
-        int a = 12;
-    }
-    
-    public void checkOldPassword(){
-        //TODO: check old password...
-        String loginname =appInfo.getLoginname();
+        boolean changed = userService.changePassword(loginname, oldPass, newPass);
         
-        
-        
-        
-        
-        
-        
-        
-        
+        return changed;
     }
     
     public void comparePasswords(){
@@ -53,6 +49,19 @@ public class ChangePasswordViewModel {
         else {
             isNewPasswordEqual.set(true);
         }
+    }
+    
+    public void reset(){
+        //use setValue method, cause they are bound!
+        oldPassword.setValue("");
+        newPassword.setValue("");
+        newPassword2.setValue("");
+        
+        isNewPasswordEqual.setValue(Boolean.TRUE);
+    }
+    
+    public void showWarnDialog(){
+        showDialog(SimpleDialog.class, DialogIcon.WARN, "Password not changed! Maybe your old password is wrong?", warnDialogKey);
     }
     
     public String getOldPassword() {
@@ -102,17 +111,5 @@ public class ChangePasswordViewModel {
     public BooleanProperty isNewPasswordEqualProperty() {
         return isNewPasswordEqual;
     }
-    
-    public boolean isIsOldPasswordOk() {
-        return isOldPasswordOk.get();
-    }
-
-    public void setIsOldPasswordOk(boolean value) {
-        isOldPasswordOk.set(value);
-    }
-
-    public BooleanProperty isOldPasswordOkProperty() {
-        return isOldPasswordOk;
-    }
-    
+        
 }
