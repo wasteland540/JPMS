@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="view" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="216.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jpms.view.LoginView">
+    <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="118.0" layoutX="14.0" layoutY="91.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" width="334.0" />
+      <Label layoutX="14.0" layoutY="72.0" text="Login" />
+      <Label layoutX="18.0" layoutY="99.0" text="Loginname:" />
+      <TextField fx:id="loginnameField" layoutX="89.0" layoutY="96.0" prefHeight="25.0" prefWidth="251.0" promptText="M.Mustermann" />
+      <Label layoutX="18.0" layoutY="129.0" text="Password:" />
+      <PasswordField fx:id="passwordField" layoutX="89.0" layoutY="125.0" prefHeight="25.0" prefWidth="251.0" />
+      <Button fx:id="loginBtn" layoutX="211.0" layoutY="177.0" mnemonicParsing="false" onAction="#handleLoginBtnAction" prefHeight="25.0" prefWidth="129.0" text="Login" />
+      <ImageView fitHeight="78.0" fitWidth="338.0" layoutX="49.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="resources/images/chorlogo.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="errorMsgLbl" layoutX="89.0" layoutY="150.0" text="Loginname or Password wrong!" textFill="RED" visible="false" />
+    </children>
+</AnchorPane>
