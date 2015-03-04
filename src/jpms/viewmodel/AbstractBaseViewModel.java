@@ -27,6 +27,8 @@ public abstract class AbstractBaseViewModel {
     private  Connection connection;
     private Channel channel;
     
+    //TODO: showModualStage and showDialog method refactor
+    
     public void showModualStage(Class<?> view, String stageKey, String windowTitle){
         IBasicView basicView = (IBasicView) jpms.JPMS.getInjector().getInstance(view);
         basicView.payloadBindings();

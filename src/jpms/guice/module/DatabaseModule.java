@@ -3,6 +3,8 @@ package jpms.guice.module;
 import com.google.inject.AbstractModule;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import jpms.services.ChoirService;
+import jpms.services.IChoirService;
 import jpms.services.IPersonService;
 import jpms.services.IUserService;
 import jpms.services.PersonService;
@@ -23,5 +25,6 @@ public class DatabaseModule extends AbstractModule {
         //bind all database service
         bind(IPersonService.class).to(PersonService.class);
         bind(IUserService.class).to(UserService.class);
+        bind(IChoirService.class).to(ChoirService.class);
     }    
 }

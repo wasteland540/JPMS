@@ -1,13 +1,10 @@
 package jpms.services;
 
-import com.google.inject.Inject;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import jpms.model.PmsUser;
 import jpms.security.PBKDF2WithHmacSHA1;
@@ -16,12 +13,7 @@ import jpms.security.PBKDF2WithHmacSHA1;
  *
  * @author m.elz
  */
-public class UserService implements IUserService {
-
-    @Inject
-    private EntityManagerFactory entityManagerFactory;
-    
-    private EntityManager em;
+public class UserService extends AbstractService implements IUserService {
     
     @Override
     public boolean exsistUser(String loginName) {
@@ -171,18 +163,5 @@ public class UserService implements IUserService {
         
         endTransaction();
     }
-
-    private void startTransaction(){
-        em = entityManagerFactory.createEntityManager();
-        em.getTransaction().begin();
-    }
-    
-    private void endTransaction(){
-        em.flush();
-        em.getTransaction().commit();
-        em.close();
-    }
-
-
 
 }
