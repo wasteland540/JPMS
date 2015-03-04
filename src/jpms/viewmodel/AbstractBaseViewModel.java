@@ -118,6 +118,8 @@ public abstract class AbstractBaseViewModel {
                 
                 if(msg.equals(ViewModelMessage.NEW_USER_ADDED.name())){
                     callback.execute(ViewModelMessage.NEW_USER_ADDED);
+                } else if(msg.equals(ViewModelMessage.NEW_CHOIR_ADDED.name())){
+                    callback.execute(ViewModelMessage.NEW_CHOIR_ADDED);
                 }
                 
                 channel.basicAck(deliveryTag, false);

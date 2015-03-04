@@ -1,6 +1,7 @@
 package jpms.view.choir;
 
 import com.google.inject.Inject;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
@@ -76,7 +77,7 @@ public class NewChoirView extends AbstractView implements Initializable, IBasicV
     }
     
     @FXML
-    private void handleCreateBtnAction(ActionEvent event){
+    private void handleCreateBtnAction(ActionEvent event) throws IOException{
         boolean isCreated = viewModel.create();
         
         if(isCreated){

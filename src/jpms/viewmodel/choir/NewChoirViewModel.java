@@ -1,10 +1,14 @@
 package jpms.viewmodel.choir;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
+import java.io.IOException;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import jpms.messaging.ViewModelMessage;
+import jpms.messaging.ViewModelQueue;
 import jpms.services.IChoirService;
 import jpms.viewmodel.AbstractBaseViewModel;
 
@@ -12,6 +16,7 @@ import jpms.viewmodel.AbstractBaseViewModel;
  *
  * @author m.elz
  */
+@Singleton
 public class NewChoirViewModel extends AbstractBaseViewModel {
     
     @Inject
@@ -31,8 +36,14 @@ public class NewChoirViewModel extends AbstractBaseViewModel {
         }
     }
     
-    public boolean create(){
-        return choirService.createChoir(choirName.get());
+    public boolean create() throws IOException{
+        boolean created = choirService.createChoir(choirName.get());
+        
+        if(created){
+            sendMessage(ViewModelQueue.NEW_CHOIR_ADDED_QUEUE.name(), ViewModelMessage.NEW_CHOIR_ADDED.name());
+        }
+        
+        return created;
     }
     
     public void reset(){

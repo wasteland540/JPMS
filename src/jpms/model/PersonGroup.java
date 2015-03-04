@@ -18,12 +18,18 @@ import javax.persistence.NamedQuery;
  */
 @Entity
 @NamedQueries({@NamedQuery(name = PersonGroup.findGroupByName,
-                           query = "SELECT pg FROM PersonGroup pg WHERE pg.name = :groupName")})
+                           query = "SELECT pg FROM PersonGroup pg WHERE pg.name = :groupName"),
+               @NamedQuery(name = PersonGroup.getAll,
+                           query = "SELECT pg FROM PersonGroup pg"),
+               @NamedQuery(name = PersonGroup.findGroupById,
+                           query = "SELECT pg FROM PersonGroup pg WHERE pg.id = :groupId")})
 public class PersonGroup implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
     public static final String findGroupByName = "findGroupByName";
+    public static final String getAll = "getAll";
+    public static final String findGroupById = "findGroupById";
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,6 +67,11 @@ public class PersonGroup implements Serializable {
 
     public void setPersons(List<Person> persons) {
         this.persons = persons;
+    }
+    
+    @Override
+    public String toString(){
+        return this.name;
     }
     
 }

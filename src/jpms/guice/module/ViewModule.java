@@ -9,6 +9,7 @@ import jpms.view.MainView;
 import jpms.view.account.ChangePasswordView;
 import jpms.view.account.DeleteUserView;
 import jpms.view.account.NewUserView;
+import jpms.view.choir.EditChoirView;
 import jpms.view.choir.NewChoirView;
 import jpms.view.dialogs.SimpleDialog;
 
@@ -29,6 +30,7 @@ public class ViewModule extends AbstractModule {
         bind(ChangePasswordView.class).toInstance((ChangePasswordView) loadController("/jpms/fxml/account/ChangePasswordView.fxml"));
         
         bind(NewChoirView.class).toInstance((NewChoirView) loadController("/jpms/fxml/choir/NewChoirView.fxml"));
+        bind(EditChoirView.class).toInstance((EditChoirView) loadController("/jpms/fxml/choir/EditChoirView.fxml"));
         //TODO: bind all views
         
         //dialogs:

@@ -16,6 +16,7 @@ import jpms.guice.module.MasterModule;
 import jpms.view.IBasicView;
 import jpms.view.LoginView;
 import jpms.viewmodel.account.DeleteUserViewModel;
+import jpms.viewmodel.choir.EditChoirViewModel;
 
 /**
  *
@@ -55,11 +56,23 @@ public class JPMS extends Application {
     
     @Override
     public void stop(){
-        //TODO: every class with starts a consumer, from rabbitMQ, have to close there channel and connection on application exit!
+        //every class with starts a consumer, from rabbitMQ, have to close there channel and connection on application exit!
         //note: this only works, because all viewmodels will be singletons..
         //note 2: --> every class with will start a consumer have to be a singleton!
-        DeleteUserViewModel viewModel = injector.getInstance(DeleteUserViewModel.class);
+        //TODO: refactoring!  
+        
         try {
+            DeleteUserViewModel viewModel = injector.getInstance(DeleteUserViewModel.class);
+            
+            viewModel.getChannel().close();
+            viewModel.getConnection().close();
+        } catch (IOException ex) {
+            Logger.getLogger(JPMS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            EditChoirViewModel viewModel = injector.getInstance(EditChoirViewModel.class);
+            
             viewModel.getChannel().close();
             viewModel.getConnection().close();
         } catch (IOException ex) {

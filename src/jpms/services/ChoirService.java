@@ -49,5 +49,40 @@ public class ChoirService extends AbstractService implements IChoirService {
         
         return created;
     }
+
+    @Override
+    public List<PersonGroup> getChoirs() {
+        List<PersonGroup> resultList;
+        
+        startTransaction();
+        
+        Query query = em.createNamedQuery(PersonGroup.getAll);
+        resultList = (List<PersonGroup>) query.getResultList();
+        
+        endTransaction();
+        
+        return resultList;
+    }
+
+    @Override
+    public boolean rename(Long id, String newChoirName) {
+        boolean renamed;
+        
+        startTransaction();
+        
+        Query query = em.createNamedQuery(PersonGroup.findGroupById);
+        query.setParameter("groupId", id);
+        
+        PersonGroup group = (PersonGroup) query.getSingleResult();
+        
+        group.setName(newChoirName);
+        
+        em.persist(group);
+        renamed = true;
+        
+        endTransaction();
+        
+        return renamed;
+    }
     
 }

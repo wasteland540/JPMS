@@ -21,7 +21,7 @@
           <Menu mnemonicParsing="false" text="Choirs">
             <items>
                 <MenuItem mnemonicParsing="false" text="New" onAction="#handleChoirsNewMenuAction" />
-                <MenuItem mnemonicParsing="false" text="Edit" onAction="#handleChoirsEditMenuAction" />
+                <MenuItem mnemonicParsing="false" text="Rename" onAction="#handleChoirsEditMenuAction" />
                 <MenuItem mnemonicParsing="false" text="Delete" onAction="#handleChoirsDeleteMenuAction" />
             </items>
           </Menu>
