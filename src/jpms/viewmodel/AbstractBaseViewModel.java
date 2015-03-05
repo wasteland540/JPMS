@@ -26,6 +26,8 @@ public abstract class AbstractBaseViewModel {
         
     private  Connection connection;
     private Channel channel;
+//    private  Connection connection2;
+//    private Channel channel2;
     
     //TODO: showModualStage and showDialog method refactor
     
@@ -59,7 +61,9 @@ public abstract class AbstractBaseViewModel {
         }
     }
     
-    public void showDialog(Class<?> dialog, DialogIcon icon, String message, String stageKey){
+    public void showDialog(Class<?> dialog, DialogIcon icon, String message){
+        String stageKey = dialog.getName();        
+        
         IBasicDialog basicDialog = (IBasicDialog) jpms.JPMS.getInjector().getInstance(dialog);
         basicDialog.setMessage(icon, message);
         
@@ -89,6 +93,7 @@ public abstract class AbstractBaseViewModel {
         }
     }
     
+    //TODO: messaging evtl. nit benötigt?!
     protected void sendMessage(String queueName, String msg) throws IOException{
         setupMessageConnection();
         
@@ -120,6 +125,8 @@ public abstract class AbstractBaseViewModel {
                     callback.execute(ViewModelMessage.NEW_USER_ADDED);
                 } else if(msg.equals(ViewModelMessage.NEW_CHOIR_ADDED.name())){
                     callback.execute(ViewModelMessage.NEW_CHOIR_ADDED);
+                } else if(msg.equals(ViewModelMessage.CHOIR_DELETED.name())){
+                    callback.execute(ViewModelMessage.CHOIR_DELETED);
                 }
                 
                 channel.basicAck(deliveryTag, false);
@@ -135,6 +142,14 @@ public abstract class AbstractBaseViewModel {
         channel = connection.createChannel();
     }
     
+//    private void setupMessageConnection2() throws IOException{
+//        ConnectionFactory factory = new ConnectionFactory();
+//        factory.setHost("localhost");
+//        
+//        connection2 = factory.newConnection();
+//        channel2 = connection2.createChannel();
+//    }
+    
     private void closeMessageConnection() throws IOException{
         channel.close();
         connection.close();
@@ -147,5 +162,13 @@ public abstract class AbstractBaseViewModel {
     public Channel getChannel() {
         return channel;
     }
+    
+//    public Connection getConnection2() {
+//        return connection2;
+//    }
+//
+//    public Channel getChannel2() {
+//        return channel2;
+//    }
 
 }

@@ -84,5 +84,24 @@ public class ChoirService extends AbstractService implements IChoirService {
         
         return renamed;
     }
+
+    @Override
+    public boolean delete(Long id) {
+        boolean deleted;
+        
+        startTransaction();
+        
+        Query query = em.createNamedQuery(PersonGroup.findGroupById);
+        query.setParameter("groupId", id);
+        
+        PersonGroup group = (PersonGroup) query.getSingleResult();
+        
+        em.remove(group);
+        deleted = true;
+        
+        endTransaction();
+        
+        return deleted;
+    }
     
 }

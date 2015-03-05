@@ -2,7 +2,6 @@ package jpms.viewmodel.choir;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import java.io.IOException;
 import java.util.List;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -10,9 +9,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import jpms.callback.MessageCallBack;
-import jpms.messaging.ViewModelMessage;
-import jpms.messaging.ViewModelQueue;
 import jpms.model.PersonGroup;
 import jpms.services.IChoirService;
 import jpms.viewmodel.AbstractBaseViewModel;
@@ -22,7 +18,7 @@ import jpms.viewmodel.AbstractBaseViewModel;
  * @author m.elz
  */
 @Singleton
-public class EditChoirViewModel extends AbstractBaseViewModel implements MessageCallBack {
+public class EditChoirViewModel extends AbstractBaseViewModel {
     
     @Inject
     private IChoirService choirService;
@@ -33,10 +29,6 @@ public class EditChoirViewModel extends AbstractBaseViewModel implements Message
     
     private PersonGroup selectedChoir;
     private ObservableList<PersonGroup> choirlist;
-
-    public EditChoirViewModel() throws IOException, InterruptedException{
-        receiveMessage(ViewModelQueue.NEW_CHOIR_ADDED_QUEUE.name(), this);
-    }
     
     public void checkChoirName(){
         boolean isTaken = choirService.checkChoirName(newChoirName.get());
@@ -94,9 +86,7 @@ public class EditChoirViewModel extends AbstractBaseViewModel implements Message
     }
     
     public ObservableList getChoirlist() {
-        if(choirlist == null){
-            reloadChoirList();
-        }
+        reloadChoirList();
         
         return choirlist;
     }
@@ -115,14 +105,7 @@ public class EditChoirViewModel extends AbstractBaseViewModel implements Message
         
         this.selectedChoir = selectedChoir;
     } 
-    
-    @Override
-    public void execute(ViewModelMessage message) {
-        if(message == ViewModelMessage.NEW_CHOIR_ADDED){
-            reloadChoirList();
-        }
-    }
-    
+        
     public void reloadChoirList(){
         List<PersonGroup> choirs = choirService.getChoirs();
         

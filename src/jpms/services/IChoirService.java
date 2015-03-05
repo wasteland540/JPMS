@@ -17,4 +17,6 @@ public interface IChoirService {
     
     boolean rename(Long id, String newChoirName);
     
+    boolean delete(Long id);
+    
 }

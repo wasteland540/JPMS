@@ -18,9 +18,7 @@ import jpms.viewmodel.AbstractBaseViewModel;
  */
 @Singleton
 public class ChangePasswordViewModel extends AbstractBaseViewModel {
-    
-    private final String warnDialogKey = "ChangePasswordViewModel.warnDialogKey";
-    
+        
     @Inject
     private IAppInfo appInfo;
     
@@ -61,7 +59,7 @@ public class ChangePasswordViewModel extends AbstractBaseViewModel {
     }
     
     public void showWarnDialog(){
-        showDialog(SimpleDialog.class, DialogIcon.WARN, "Password not changed! Maybe your old password is wrong?", warnDialogKey);
+        showDialog(SimpleDialog.class, DialogIcon.WARN, "Password not changed! Maybe your old password is wrong?");
     }
     
     public String getOldPassword() {

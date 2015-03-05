@@ -2,11 +2,8 @@ package jpms;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,8 +12,6 @@ import javafx.stage.Stage;
 import jpms.guice.module.MasterModule;
 import jpms.view.IBasicView;
 import jpms.view.LoginView;
-import jpms.viewmodel.account.DeleteUserViewModel;
-import jpms.viewmodel.choir.EditChoirViewModel;
 
 /**
  *
@@ -61,23 +56,14 @@ public class JPMS extends Application {
         //note 2: --> every class with will start a consumer have to be a singleton!
         //TODO: refactoring!  
         
-        try {
-            DeleteUserViewModel viewModel = injector.getInstance(DeleteUserViewModel.class);
-            
-            viewModel.getChannel().close();
-            viewModel.getConnection().close();
-        } catch (IOException ex) {
-            Logger.getLogger(JPMS.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        try {
-            EditChoirViewModel viewModel = injector.getInstance(EditChoirViewModel.class);
-            
-            viewModel.getChannel().close();
-            viewModel.getConnection().close();
-        } catch (IOException ex) {
-            Logger.getLogger(JPMS.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            DeleteUserViewModel viewModel = injector.getInstance(DeleteUserViewModel.class);
+//            
+//            viewModel.getChannel().close();
+//            viewModel.getConnection().close();
+//        } catch (IOException ex) {
+//            Logger.getLogger(JPMS.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
     
     /**

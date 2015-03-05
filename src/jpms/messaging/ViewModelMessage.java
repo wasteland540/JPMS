@@ -7,6 +7,7 @@ package jpms.messaging;
 public enum ViewModelMessage {
     
     NEW_USER_ADDED,
-    NEW_CHOIR_ADDED;
+    NEW_CHOIR_ADDED,
+    CHOIR_DELETED;
     
 }

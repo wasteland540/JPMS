@@ -183,4 +183,9 @@ public class Person implements Serializable {
         this.personGroups = personGroups;
     }   
     
+    @Override
+    public String toString(){
+        return String.format("%s, %s", this.lastname, this.firstname);
+    }
+    
 }

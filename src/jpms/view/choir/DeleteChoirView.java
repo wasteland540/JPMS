@@ -1,53 +1,50 @@
 package jpms.view.choir;
 
 import com.google.inject.Inject;
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TextField;
+import jpms.model.Person;
 import jpms.model.PersonGroup;
 import jpms.view.AbstractView;
 import jpms.view.IBasicView;
 import jpms.view.dialogs.DialogIcon;
 import jpms.view.dialogs.SimpleDialog;
-import jpms.viewmodel.choir.EditChoirViewModel;
+import jpms.viewmodel.choir.DeleteChoirViewModel;
 
 /**
  * FXML Controller class
  *
  * @author m.elz
  */
-public class EditChoirView extends AbstractView implements Initializable, IBasicView {
+public class DeleteChoirView extends AbstractView implements Initializable, IBasicView {
     
     @Inject
-    private EditChoirViewModel viewModel;
+    private DeleteChoirViewModel viewModel;
     
     @FXML
     private Node view;
-
+    
     @FXML
     private ListView<PersonGroup> choirListView;
     
     @FXML
-    private TextField oldChoirNameField;
+    private ListView<Person> personListView;
     
     @FXML
-    private TextField newChoirNameField;
-    
-    @FXML
-    private Button renameBtn;
-    
-    @FXML
-    private Label errorMsgLbl;
+    private Button deleteBtn;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -58,56 +55,51 @@ public class EditChoirView extends AbstractView implements Initializable, IBasic
     public Node getView() {
         return view;
     }
-    
+
     @Override
     public void payloadBindings() {
-        viewModel.newChoirNameProperty().bindBidirectional(newChoirNameField.textProperty());
-        
-        oldChoirNameField.textProperty().bind(viewModel.oldChoirNameProperty());
-        errorMsgLbl.visibleProperty().bind(viewModel.isChoirNameTakenProperty());
-        renameBtn.disableProperty().bind(errorMsgLbl.visibleProperty());
+        deleteBtn.disableProperty().bind(viewModel.hasLinkedPersonsProperty());
         
         choirListView.setItems(viewModel.getChoirlist());
+        
+        List<Person> persons = new ArrayList<>();
+        personListView.setItems(FXCollections.observableArrayList(persons));
         
         setupListeners();
     }
     
     @Override
     protected void setupListeners() {
-        //newChoirNameTextChanged
-        newChoirNameField.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> ov, String t, String t1) {
-                viewModel.checkChoirName();
-            }
-        });
-        
         //choir list selection
         choirListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         choirListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<PersonGroup>() {
             @Override
             public void changed(ObservableValue<? extends PersonGroup> ov, PersonGroup oldValue, PersonGroup newValue) {
                 viewModel.setSelectedChoir(newValue);
+                
+                if(viewModel.getSelectedChoir() != null){
+                    List<Person> linkedPersons = viewModel.getSelectedChoir().getPersons();
+
+                    personListView.getItems().clear();
+                    personListView.getItems().addAll(linkedPersons);
+                }
             }
         });
-    }   
-    
+    }
+
     @FXML
-    private void handleRenameBtnAction(ActionEvent event){        
-        boolean isRenamed = viewModel.rename();
+    private void handleDeleteBtnAction(ActionEvent event) throws IOException{
+        boolean deleted = viewModel.delete();
         
-        if(isRenamed){
-            //clear field, for reuse
-            viewModel.reset();
+        if(deleted){
             viewModel.reloadChoirList();
             
             //notify user
-            viewModel.showDialog(SimpleDialog.class, DialogIcon.INFO, "Choir renamed!");
+            viewModel.showDialog(SimpleDialog.class, DialogIcon.INFO, "Choir deleted!");
         }
         else {
             //notify user
             viewModel.showDialog(SimpleDialog.class, DialogIcon.WARN, "Ups, sorry! Something went wrong. Please try again!");
         }
     }
-    
 }

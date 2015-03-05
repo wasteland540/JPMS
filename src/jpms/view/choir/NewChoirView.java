@@ -26,9 +26,6 @@ import jpms.viewmodel.choir.NewChoirViewModel;
  * @author m.elz
  */
 public class NewChoirView extends AbstractView implements Initializable, IBasicView {
-
-    private final String infoDialogKey = "NewChoirView.infoDialogKey";
-    private final String warnDialogKey = "NewChoirView.warnDialogKey";
     
     @Inject
     private NewChoirViewModel viewModel;
@@ -85,7 +82,7 @@ public class NewChoirView extends AbstractView implements Initializable, IBasicV
             viewModel.reset();
             
             //notify user
-            viewModel.showDialog(SimpleDialog.class, DialogIcon.INFO, "Choir was created!", infoDialogKey);
+            viewModel.showDialog(SimpleDialog.class, DialogIcon.INFO, "Choir was created!");
             
             // close the dialog.
             Stage stage  = (Stage) getView().getScene().getWindow();
@@ -93,7 +90,7 @@ public class NewChoirView extends AbstractView implements Initializable, IBasicV
         }
         else {
             //notify user
-            viewModel.showDialog(SimpleDialog.class, DialogIcon.WARN, "Ups, sorry! Something went wrong. Please try again!", warnDialogKey);
+            viewModel.showDialog(SimpleDialog.class, DialogIcon.WARN, "Ups, sorry! Something went wrong. Please try again!");
         }
     }
 }
