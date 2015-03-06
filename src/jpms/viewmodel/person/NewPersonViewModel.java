@@ -121,7 +121,19 @@ public class NewPersonViewModel extends AbstractBaseViewModel {
     public void reset(){
         communications.clear();
         
-        //TODO: reset all fields!        
+        firstname.setValue("");
+        lastname.setValue("");
+        age.setValue("");
+        birthday.setValue("");
+        enterDate.setValue("");
+        street.setValue("");
+        zipcode.set("");
+        city.setValue("");
+        functionRole.setValue("");
+        honor.setValue("");
+        isBirthdayDateVaild.setValue(Boolean.TRUE);
+        isEnterDateVaild.setValue(Boolean.TRUE);
+        isZipcodeVaild.setValue(Boolean.TRUE);
     }
     
     private Person createPersonWithAllRelationships() throws ParseException{
