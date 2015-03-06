@@ -107,7 +107,7 @@ public class MainView implements Initializable, IBasicView {
     
     @FXML
     private void handleMembersNewMenuAction(ActionEvent event){
-
+        viewModel.newMember();
     }
     
     @FXML

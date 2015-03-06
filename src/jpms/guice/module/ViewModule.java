@@ -13,6 +13,7 @@ import jpms.view.choir.DeleteChoirView;
 import jpms.view.choir.EditChoirView;
 import jpms.view.choir.NewChoirView;
 import jpms.view.dialogs.SimpleDialog;
+import jpms.view.person.NewPersonView;
 
 /**
  *
@@ -33,6 +34,8 @@ public class ViewModule extends AbstractModule {
         bind(NewChoirView.class).toInstance((NewChoirView) loadController("/jpms/fxml/choir/NewChoirView.fxml"));
         bind(EditChoirView.class).toInstance((EditChoirView) loadController("/jpms/fxml/choir/EditChoirView.fxml"));
         bind(DeleteChoirView.class).toInstance((DeleteChoirView) loadController("/jpms/fxml/choir/DeleteChoirView.fxml"));
+        
+        bind(NewPersonView.class).toInstance((NewPersonView) loadController("/jpms/fxml/person/NewPersonView.fxml"));
         //TODO: bind all views
         
         //dialogs:

@@ -4,18 +4,19 @@ package jpms.model;
  *
  * @author m.elz
  */
-public enum CommunicationTyp {
+public enum SalutationType {
     
-    Phone ("Telefon"),
-    Mobile ("Handy"),
-    Email ("E-mail");
-    
+    Frau ("Frau"),
+    FrauDr ("Frau Dr."),
+    Herr ("Herr"),
+    HerrDr ("Herr Dr.");
+
     private final String typ;
-    
-    private CommunicationTyp(String typ){
+
+    private SalutationType(String typ){
         this.typ = typ;
     }
-    
+ 
     @Override
     public String toString(){
         return typ;

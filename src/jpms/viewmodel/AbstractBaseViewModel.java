@@ -26,8 +26,6 @@ public abstract class AbstractBaseViewModel {
         
     private  Connection connection;
     private Channel channel;
-//    private  Connection connection2;
-//    private Channel channel2;
     
     //TODO: showModualStage and showDialog method refactor
     
@@ -142,14 +140,6 @@ public abstract class AbstractBaseViewModel {
         channel = connection.createChannel();
     }
     
-//    private void setupMessageConnection2() throws IOException{
-//        ConnectionFactory factory = new ConnectionFactory();
-//        factory.setHost("localhost");
-//        
-//        connection2 = factory.newConnection();
-//        channel2 = connection2.createChannel();
-//    }
-    
     private void closeMessageConnection() throws IOException{
         channel.close();
         connection.close();
@@ -163,12 +153,4 @@ public abstract class AbstractBaseViewModel {
         return channel;
     }
     
-//    public Connection getConnection2() {
-//        return connection2;
-//    }
-//
-//    public Channel getChannel2() {
-//        return channel2;
-//    }
-
 }

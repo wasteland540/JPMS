@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jpms.model;
 
 import java.io.Serializable;
@@ -28,7 +23,7 @@ public class AdditionalInfo implements Serializable {
     @Column(name = "AddInfo_ID")
     private Long id;
     
-    private VoiceTyp voice;
+    private VoiceType voice;
     
     private String functionRole;
     
@@ -45,11 +40,11 @@ public class AdditionalInfo implements Serializable {
         this.id = id;
     }
 
-    public VoiceTyp getVoice() {
+    public VoiceType getVoice() {
         return voice;
     }
 
-    public void setVoice(VoiceTyp voice) {
+    public void setVoice(VoiceType voice) {
         this.voice = voice;
     }
 

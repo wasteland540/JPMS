@@ -32,7 +32,7 @@ public class Person implements Serializable {
     @Column(name = "Pers_ID")
     private Long id;
     
-    private String salutation;
+    private SalutationType salutation;
     private String lastname;
     private String firstname;
     
@@ -75,11 +75,11 @@ public class Person implements Serializable {
         this.id = id;
     }
 
-    public String getSalutation() {
+    public SalutationType getSalutation() {
         return salutation;
     }
 
-    public void setSalutation(String salutation) {
+    public void setSalutation(SalutationType salutation) {
         this.salutation = salutation;
     }
 
