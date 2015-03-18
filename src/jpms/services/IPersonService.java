@@ -13,4 +13,6 @@ public interface IPersonService {
     
     List<Person> getPersons();
     
+    List<Person> getPersons(boolean passive);
+    
 }

@@ -44,5 +44,20 @@ public class PersonService extends AbstractService implements IPersonService {
         
         return resultList;
     }
+
+    @Override
+    public List<Person> getPersons(boolean passive) {
+        List<Person> resultList;
+        
+        startTransaction();
+        
+        Query query = em.createNamedQuery(Person.getPassivePersons);
+        query.setParameter("active", !passive);
+        resultList = query.getResultList();
+        
+        endTransaction();
+        
+        return resultList;
+    }
           
 }

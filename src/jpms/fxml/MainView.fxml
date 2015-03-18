@@ -29,7 +29,7 @@
             <items>
               <MenuItem mnemonicParsing="false" text="New" onAction="#handleMembersNewMenuAction" />
               <MenuItem mnemonicParsing="false" text="Edit" onAction="#handleMembersEditMenuAction" />
-              <MenuItem mnemonicParsing="false" text="Delete" onAction="#handleMembersDeleteMenuAction" />
+              <MenuItem mnemonicParsing="false" text="Set Passive" onAction="#handleMembersSetPassiveMenuAction" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Dues">

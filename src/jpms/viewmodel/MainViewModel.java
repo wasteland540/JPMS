@@ -9,6 +9,7 @@ import jpms.view.choir.EditChoirView;
 import jpms.view.choir.NewChoirView;
 import jpms.view.person.EditPersonView;
 import jpms.view.person.NewPersonView;
+import jpms.view.person.SetPassivPersonView;
 
 /**
  *
@@ -25,6 +26,7 @@ public class MainViewModel extends AbstractBaseViewModel {
     private final String deleteChoirStageKey = "deleteChoirStageKey";
     private final String newPersonStageKey = "newPersonStageKey";
     private final String editPersonStageKey = "editPersonStageKey";
+    private final String setPassivePersonStageKey = "setPassivePersonStageKey";
             
     public void showNewUserView(){
         showModualStage(NewUserView.class, newUserStageKey, "New User");
@@ -57,4 +59,9 @@ public class MainViewModel extends AbstractBaseViewModel {
     public void editMember() {
         showModualStage(EditPersonView.class, editPersonStageKey, "Edit Member");
     }
+    
+    public void setMemberPassive(){
+        showModualStage(SetPassivPersonView.class, setPassivePersonStageKey, "Set Member Passive");
+    }
+    
 }

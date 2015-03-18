@@ -77,12 +77,6 @@ public class EditPersonView extends AbstractView implements Initializable, IBasi
     private ComboBox choirCb;
     
     @FXML
-    private Button addChoirBtn;
-    
-    @FXML
-    private Button removeChoirBtn;
-    
-    @FXML
     private TextField streetField;
     
     @FXML
@@ -105,12 +99,6 @@ public class EditPersonView extends AbstractView implements Initializable, IBasi
     
     @FXML
     private ListView<Communication> contactListView;
-    
-    @FXML
-    private Button addContactBtn;
-    
-    @FXML
-    private Button removeContactBtn;
     
     @FXML
     private ComboBox<CommunicationTyp> contactTypeCb;

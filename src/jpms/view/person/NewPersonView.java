@@ -56,7 +56,7 @@ public class NewPersonView extends AbstractView implements Initializable, IBasic
     private TextField ageField;
     
     @FXML
-    private ComboBox<PersonGroup> choirCb; //TODO: evtl checkbox bombo??
+    private ComboBox<PersonGroup> choirCb;
     
     @FXML
     private TextField birthdayField;

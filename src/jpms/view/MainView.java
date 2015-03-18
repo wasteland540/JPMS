@@ -116,8 +116,8 @@ public class MainView implements Initializable, IBasicView {
     }
     
     @FXML
-    private void handleMembersDeleteMenuAction(ActionEvent event){
-
+    private void handleMembersSetPassiveMenuAction(ActionEvent event){
+        viewModel.setMemberPassive();
     }
     
     @FXML

@@ -26,12 +26,15 @@ import javax.persistence.Temporal;
  */
 @Entity
 @NamedQueries({@NamedQuery(name = Person.getPersons,
-                           query = "SELECT p FROM Person p")})
+                           query = "SELECT p FROM Person p"),
+               @NamedQuery(name = Person.getPassivePersons,
+                           query = "SELECT p FROM Person p WHERE p.activ = :active")})
 public class Person implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
     public static final String getPersons = "getPersons";
+    public static final String getPassivePersons = "getPassivePersons";
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

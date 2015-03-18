@@ -51,6 +51,11 @@ public class NewPersonViewModel extends AbstractPersonBaseViewModel {
         Person person = new Person();
         person.setFirstname(getFirstname());
         person.setLastname(getLastname());
+        
+        if(getAge().equals("")){
+            setAge("0");
+        }
+        
         person.setAge(Integer.parseInt(getAge()));
         person.setActiv(true);
         person.setBirthday(dateFormat.parse(getBirthday()));
