@@ -1,5 +1,6 @@
 package jpms.services;
 
+import java.util.List;
 import jpms.model.Person;
 
 /**
@@ -9,5 +10,7 @@ import jpms.model.Person;
 public interface IPersonService {
     
     boolean save(Person person);
+    
+    List<Person> getPersons();
     
 }

@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -23,9 +25,13 @@ import javax.persistence.Temporal;
  * @author m.elz
  */
 @Entity
+@NamedQueries({@NamedQuery(name = Person.getPersons,
+                           query = "SELECT p FROM Person p")})
 public class Person implements Serializable {
     
     private static final long serialVersionUID = 1L;
+    
+    public static final String getPersons = "getPersons";
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -112,7 +112,7 @@ public class MainView implements Initializable, IBasicView {
     
     @FXML
     private void handleMembersEditMenuAction(ActionEvent event){
-
+        viewModel.editMember();
     }
     
     @FXML
