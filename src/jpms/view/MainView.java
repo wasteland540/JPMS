@@ -6,14 +6,16 @@ import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Menu;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import jpms.model.Person;
 import jpms.model.PersonGroup;
 import jpms.viewmodel.MainViewModel;
 
@@ -22,7 +24,7 @@ import jpms.viewmodel.MainViewModel;
  *
  * @author m.elz
  */
-public class MainView implements Initializable, IBasicView {
+public class MainView extends AbstractView implements Initializable, IBasicView {
 
     @Inject
     private MainViewModel viewModel;
@@ -31,13 +33,10 @@ public class MainView implements Initializable, IBasicView {
     private Node view;
     
     @FXML
-    private Menu duesMenu;
+    private TextField searchField;
     
     @FXML
-    private TextField searchFiel;
-    
-    @FXML
-    private TableView membersTable;
+    private TableView<Person> membersTable;
     
     @FXML
     private ComboBox<PersonGroup> choirCb;
@@ -66,26 +65,84 @@ public class MainView implements Initializable, IBasicView {
     @FXML
     private TextField selectedEntersDateField;
     
+    @FXML
+    private TableColumn lastnameCol;
+    
+    @FXML
+    private TableColumn firstnameCol;
+    
+    @FXML
+    private TableColumn ageCol;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //note: do nothing here! because we get wrong handling by guice...
     }    
     
     @Override
-    public void payloadBindings() {
-
-    }
-    
-    @Override
     public Node getView(){
         return view;
     }
-
-    @FXML
-    private void handleSearchTextChangedAction(Event event){
+    
+    @Override
+    public void payloadBindings() {
+        //bindings
+        searchField.textProperty().bindBidirectional(viewModel.searchTextProperty());
         
+        //binding detail properties
+        selectedBirthdayField.textProperty().bind(viewModel.selectedBirthdayProperty());
+        selectedEntersDateField.textProperty().bind(viewModel.selectedEntersDateProperty());
+        selectedZipcodeField.textProperty().bind(viewModel.selectedZipcodeProperty());
+        selectedStreetField.textProperty().bind(viewModel.selectedStreetProperty());
+        selectedCityField.textProperty().bind(viewModel.selectedCityProperty());
+        selectedVoiceField.textProperty().bind(viewModel.selectedVoiceProperty());
+        selectedFunctionField.textProperty().bind(viewModel.selectedFunctionProperty());
+        selectedHonorField.textProperty().bind(viewModel.selectedHonorProperty());
+        
+        //dynamic from database
+        choirCb.getItems().addAll(viewModel.getChoirs());
+        
+        //table cell bindings
+        lastnameCol.setCellValueFactory(new PropertyValueFactory<Person, String>("lastname"));
+        firstnameCol.setCellValueFactory(new PropertyValueFactory<Person, String>("firstname"));
+        ageCol.setCellValueFactory(new PropertyValueFactory<Person, Integer>("age"));
+        
+        setupListeners();
     }
     
+    @Override
+    protected void setupListeners() {
+        //selected choir changed
+        choirCb.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<PersonGroup>() {
+            @Override
+            public void changed(ObservableValue<? extends PersonGroup> ov, PersonGroup oldValue, PersonGroup newValue) {
+                viewModel.setSelectedChoir(newValue);
+                                
+                membersTable.setItems(viewModel.getPersons());
+            }
+        });
+        
+        //search text changed
+        searchField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> ov, String oldValue, final String newValue) {             
+                viewModel.filterPersons(newValue);
+                
+                //TODO: evtl neu stetzten
+            }
+        });
+        
+        //selected person changed
+        membersTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        membersTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        membersTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Person>() {
+            @Override
+            public void changed(ObservableValue<? extends Person> ov, Person oldValue, Person newValue) {
+                viewModel.setSelectedPerson(newValue);
+            }
+        });
+    }
+        
     @FXML
     private void handleFileCreatePdfMenuAction(ActionEvent event){
         
@@ -145,4 +202,6 @@ public class MainView implements Initializable, IBasicView {
     private void handleAccountChangePasswordMenuAction(ActionEvent event){
         viewModel.showChangePasswordView();
     }
+
+
 }

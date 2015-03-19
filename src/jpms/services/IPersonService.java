@@ -15,4 +15,8 @@ public interface IPersonService {
     
     List<Person> getPersons(boolean passive);
     
+    List<Person> getPersons(boolean passive, Long choirId);
+    
+    List<Person> getPersons(boolean passive, Long choirId, String searchText);
+    
 }

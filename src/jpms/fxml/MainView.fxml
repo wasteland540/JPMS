@@ -48,11 +48,12 @@
         </menus>
       </MenuBar>
       <Label layoutX="252.0" layoutY="33.0" text="Search:" />
-      <TextField fx:id="searchField" onTextChange="#handleSearchTextChangedAction"  layoutX="252.0" layoutY="50.0" prefHeight="25.0" prefWidth="179.0" />
+      <TextField fx:id="searchField" layoutX="252.0" layoutY="50.0" prefHeight="25.0" prefWidth="179.0" />
       <TableView fx:id="membersTable" layoutX="14.0" layoutY="85.0" prefHeight="414.0" prefWidth="606.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn fx:id="lastnameCol" prefWidth="75.0" text="Lastname" />
+          <TableColumn fx:id="firstnameCol" prefWidth="75.0" text="Firstname" />
+          <TableColumn fx:id="ageCol" prefWidth="75.0" text="Age" />
         </columns>
       </TableView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="390.0" layoutX="661.0" layoutY="109.0" stroke="BLACK" strokeType="INSIDE" width="393.0" />

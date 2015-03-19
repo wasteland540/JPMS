@@ -53,6 +53,42 @@ public class PersonService extends AbstractService implements IPersonService {
         
         Query query = em.createNamedQuery(Person.getPassivePersons);
         query.setParameter("active", !passive);
+        
+        resultList = query.getResultList();
+        
+        endTransaction();
+        
+        return resultList;
+    }
+
+    @Override
+    public List<Person> getPersons(boolean passive, Long choirId) {
+        List<Person> resultList;
+        
+        startTransaction();
+        
+        Query query = em.createNamedQuery(Person.getPassivePersonsByChoir);
+        query.setParameter("active", !passive);
+        query.setParameter("choirId", choirId);
+        
+        resultList = query.getResultList();
+        
+        endTransaction();
+        
+        return resultList;
+    }
+
+    @Override
+    public List<Person> getPersons(boolean passive, Long choirId, String searchText) {
+        List<Person> resultList;
+        
+        startTransaction();
+        
+        Query query = em.createNamedQuery(Person.getPassivePersonsByFilter);
+        query.setParameter("active", !passive);
+        query.setParameter("choirId", choirId);
+        query.setParameter("searchText", "%" + searchText + "%");
+                
         resultList = query.getResultList();
         
         endTransaction();
