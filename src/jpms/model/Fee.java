@@ -21,11 +21,14 @@ import javax.persistence.Temporal;
  */
 @Entity
 @NamedQueries({@NamedQuery(name = Fee.getDuesByPersonId,
-                          query = "SELECT f FROM Fee f WHERE f.person.id = :personId")})
+                          query = "SELECT f FROM Fee f WHERE f.person.id = :personId"),
+               @NamedQuery(name = Fee.getFeeById,
+                           query = "SELECT f FROM Fee f WHERE f.id = :id")})
 public class Fee implements Serializable {
 
     private static final long serialVersionUID = 1L;
     public static final String getDuesByPersonId = "getDuesByPersonId";
+    public static final String getFeeById = "getFeeById";
     private static final DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
     
     @Id

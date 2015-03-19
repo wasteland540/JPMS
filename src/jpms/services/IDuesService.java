@@ -13,4 +13,6 @@ public interface IDuesService {
     
     void addFee(Fee fee);
     
+    void deleteFee(Fee fee);
+    
 }

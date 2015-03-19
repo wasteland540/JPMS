@@ -32,5 +32,19 @@ public class DuesService extends AbstractService implements IDuesService {
         
         endTransaction();
     }
+
+    @Override
+    public void deleteFee(Fee fee) {
+        startTransaction();
+        
+        Query query = em.createNamedQuery(Fee.getFeeById);
+        query.setParameter("id", fee.getId());
+        
+        Fee managedFee = (Fee) query.getResultList().get(0);
+        
+        em.remove(managedFee);
+        
+        endTransaction();
+    }
     
 }

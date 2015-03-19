@@ -36,6 +36,7 @@ public class DuesViewModel {
     
     private Person selectedPerson;
     private ObservableList<Person> memberList;
+    private Fee selectedFee;
     private ObservableList<Fee> feeList;
     
     private final DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
@@ -63,7 +64,14 @@ public class DuesViewModel {
             settledAt.setValue("");
             
             reloadFeeList();
-            //reloadMemberList();
+        }
+    }
+    
+    public void removeFee(){
+        if(getSelectedFee() != null){
+            duesService.deleteFee(getSelectedFee());
+            
+            reloadFeeList();
         }
     }
     
@@ -101,6 +109,14 @@ public class DuesViewModel {
         this.selectedPerson = selectedPerson;
         
         reloadFeeList();
+    }
+
+    public Fee getSelectedFee() {
+        return selectedFee;
+    }
+
+    public void setSelectedFee(Fee selectedFee) {
+        this.selectedFee = selectedFee;
     }
 
     public ObservableList<Fee> getFeeList() {

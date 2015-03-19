@@ -50,11 +50,9 @@ public class DuesView extends AbstractView implements Initializable, IBasicView 
     
     @FXML
     private Button addBtn;
-    
+        
     @FXML
     private Label dateErrorMsg;
-
-    private ObservableList<Fee> selectedPersonDues;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -104,28 +102,27 @@ public class DuesView extends AbstractView implements Initializable, IBasicView 
                 viewModel.validateDate();
             }
         });
+        
+        //selected fee changed
+        duesListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        duesListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Fee>() {
+            @Override
+            public void changed(ObservableValue<? extends Fee> ov, Fee oldValue, Fee newValue) {
+                viewModel.setSelectedFee(newValue);
+            }
+        });
     }
     
     @FXML
     private void handleAddBtnAction() throws ParseException {
         viewModel.addFee();
-        
-        //getSelectedPersonDues();
+    }
+    
+    @FXML
+    private void handleRemoveBtnAction() throws ParseException {
+        viewModel.removeFee();
     }
 
-    public ObservableList<Fee> getSelectedPersonDues() {
-        if(viewModel.getSelectedPerson() != null){
-            if(selectedPersonDues == null){
-                selectedPersonDues = FXCollections.observableArrayList(viewModel.getSelectedPerson().getFees());
-            }
-            else {
-                selectedPersonDues.clear();
-                selectedPersonDues.addAll(viewModel.getSelectedPerson().getFees());
-            }
-        }
-        
-        return selectedPersonDues;
-    }
     
     
 }
