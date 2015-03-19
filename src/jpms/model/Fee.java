@@ -1,21 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jpms.model;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 
 /**
@@ -23,9 +20,13 @@ import javax.persistence.Temporal;
  * @author m.elz
  */
 @Entity
+@NamedQueries({@NamedQuery(name = Fee.getDuesByPersonId,
+                          query = "SELECT f FROM Fee f WHERE f.person.id = :personId")})
 public class Fee implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    public static final String getDuesByPersonId = "getDuesByPersonId";
+    private static final DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,7 +40,7 @@ public class Fee implements Serializable {
     
     @ManyToOne
     @JoinColumn(name="Pers_ID", nullable = false)
-    private Person person;
+    private Person person;   
     
     public Long getId() {
         return id;
@@ -73,4 +74,8 @@ public class Fee implements Serializable {
         this.person = person;
     }
 
+    @Override
+    public String toString(){
+        return String.format("%s € (%s)", this.amount, dateFormat.format(this.settledAt));
+    }
 }

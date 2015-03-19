@@ -33,11 +33,9 @@
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Dues">
-            <items>
-              <MenuItem mnemonicParsing="false" text="New" onAction="#handleDuesNewMenuAction" />
-              <MenuItem mnemonicParsing="false" text="Edit" onAction="#handleDuesEditMenuAction" />
-              <MenuItem mnemonicParsing="false" text="Delete" onAction="#handleDuesDeleteMenuAction" />
-            </items>
+              <items>
+                  <MenuItem mnemonicParsing="false" text="Edit Dues" onAction="#handleDuesEditMenuAction" />
+              </items>
           </Menu>
           <Menu mnemonicParsing="false" text="My Account">
             <items>

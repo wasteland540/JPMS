@@ -4,7 +4,9 @@ import com.google.inject.AbstractModule;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import jpms.services.ChoirService;
+import jpms.services.DuesService;
 import jpms.services.IChoirService;
+import jpms.services.IDuesService;
 import jpms.services.IPersonService;
 import jpms.services.IUserService;
 import jpms.services.PersonService;
@@ -26,5 +28,6 @@ public class DatabaseModule extends AbstractModule {
         bind(IPersonService.class).to(PersonService.class);
         bind(IUserService.class).to(UserService.class);
         bind(IChoirService.class).to(ChoirService.class);
+        bind(IDuesService.class).to(DuesService.class);
     }    
 }
