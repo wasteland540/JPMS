@@ -30,9 +30,16 @@ import javax.persistence.Temporal;
                @NamedQuery(name = Person.getPassivePersons,
                            query = "SELECT p FROM Person p WHERE p.activ = :active"),
                @NamedQuery(name = Person.getPassivePersonsByChoir,
-                           query = "SELECT p FROM Person p JOIN p.personGroups g WHERE p.activ = :active AND g.id = :choirId"),
+                           query = "SELECT p FROM Person p JOIN p.personGroups g "
+                                   + "WHERE p.activ = :active AND g.id = :choirId"),
                @NamedQuery(name = Person.getPassivePersonsByFilter,
-                           query = "SELECT p FROM Person p JOIN p.adress a JOIN p.personGroups g WHERE p.activ = :active AND g.id = :choirId AND (p.firstname LIKE :searchText OR p.lastname LIKE :searchText OR a.zipcode LIKE :searchText OR a.city LIKE :searchText)")})
+                           query = "SELECT p FROM Person p JOIN p.adress a JOIN p.personGroups g "
+                                   + "WHERE p.activ = :active "
+                                   + "AND g.id = :choirId "
+                                   + "AND (p.firstname LIKE :searchText "
+                                        + "OR p.lastname LIKE :searchText "
+                                        + "OR a.zipcode LIKE :searchText "
+                                        + "OR a.city LIKE :searchText)")})
 public class Person implements Serializable {
     
     private static final long serialVersionUID = 1L;

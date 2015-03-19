@@ -127,8 +127,6 @@ public class MainView extends AbstractView implements Initializable, IBasicView 
             @Override
             public void changed(ObservableValue<? extends String> ov, String oldValue, final String newValue) {             
                 viewModel.filterPersons(newValue);
-                
-                //TODO: evtl neu stetzten
             }
         });
         
@@ -150,7 +148,7 @@ public class MainView extends AbstractView implements Initializable, IBasicView 
     
     @FXML
     private void handleFileCloseMenuAction(ActionEvent event){
-
+        jpms.JPMS.getPrimaryStage().close();
     }
     
     @FXML
