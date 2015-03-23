@@ -2,19 +2,22 @@ package jpms.viewmodel;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.sun.javafx.collections.transformation.FilteredList;
-import com.sun.javafx.collections.transformation.Matcher;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import jpms.model.Communication;
 import jpms.model.Person;
 import jpms.model.PersonGroup;
 import jpms.services.IChoirService;
 import jpms.services.IPersonService;
+import jpms.util.reports.DefaultMemberlistReport;
+import jpms.util.reports.helperbeans.ReportContact;
+import jpms.util.reports.helperbeans.ReportPerson;
 import jpms.view.account.ChangePasswordView;
 import jpms.view.account.DeleteUserView;
 import jpms.view.account.NewUserView;
@@ -105,6 +108,14 @@ public class MainViewModel extends AbstractBaseViewModel {
     
     public void editDues() {
         showModualStage(DuesView.class, duesStageKey, "Dues");
+    }
+        
+    public void showPdf(){
+        List<Person> allPersons = personService.getPersons(false);
+        List<ReportPerson> memberlistForReport = createReportList(allPersons);
+        
+        DefaultMemberlistReport report = new DefaultMemberlistReport();
+        report.show(memberlistForReport);
     }
     
     public void filterPersons(String searchText){
@@ -293,5 +304,70 @@ public class MainViewModel extends AbstractBaseViewModel {
             selectedFunction.setValue(getSelectedPerson().getAdditionalInfo().getFunctionRole());
             selectedHonor.setValue(getSelectedPerson().getAdditionalInfo().getHonor());
         }
+    }
+    
+    private String createPersonCsvLine(Person person){
+        StringBuilder strBuilder = new StringBuilder();
+        
+        //person data
+        strBuilder.append(person.getLastname());
+        strBuilder.append(";");
+        strBuilder.append(person.getFirstname());
+        strBuilder.append(";");
+        strBuilder.append(person.getAge());
+        strBuilder.append(";");
+        strBuilder.append(dateFormat.format(person.getBirthday()));
+        strBuilder.append(";");
+        strBuilder.append(dateFormat.format(person.getDateOfEnters()));
+        strBuilder.append(";");
+        strBuilder.append("\n");
+        
+        //address data
+        strBuilder.append("");
+        strBuilder.append(";");
+        strBuilder.append(person.getAdress().getStreet());
+        strBuilder.append(";");
+        strBuilder.append(person.getAdress().getZipcode());
+        strBuilder.append(";");
+        strBuilder.append(person.getAdress().getCity());
+        strBuilder.append(";");
+        strBuilder.append("\n");
+        
+        //additional info
+        strBuilder.append("");
+        strBuilder.append(";");
+        if(person.getAdditionalInfo().getVoice() != null){
+            strBuilder.append(person.getAdditionalInfo().getVoice().name());
+        }
+        else{
+            strBuilder.append("");
+        }
+        strBuilder.append(";");
+        strBuilder.append(person.getAdditionalInfo().getFunctionRole());
+        strBuilder.append(";");
+        strBuilder.append(person.getAdditionalInfo().getHonor());
+        strBuilder.append(";");
+        strBuilder.append("\n");
+        
+        return strBuilder.toString();
+    }
+    
+    private List<ReportPerson> createReportList(List<Person> personList){
+        List<ReportPerson> reportList = new ArrayList<>();
+        
+        for(Person p : personList){
+            List<ReportContact> contacts = new ArrayList<>();
+            
+            for(Communication c : p.getCommunications()){
+                contacts.add(new ReportContact(c.getCommunicationTyp().name(), c.getCommunicationValue()));
+            }
+            
+            reportList.add(new ReportPerson(p.getPersonGroups().get(0).getName(), p.getFirstname(), p.getLastname(), "" + p.getAge(), dateFormat.format(p.getBirthday()), dateFormat.format(p.getDateOfEnters()), 
+                                            p.getAdress().getStreet(), "" + p.getAdress().getZipcode(), p.getAdress().getCity(), 
+                                            p.getAdditionalInfo().getVoice().name(), p.getAdditionalInfo().getFunctionRole(), p.getAdditionalInfo().getHonor(), 
+                                            contacts));
+        }
+        
+        return reportList;
     }
 }

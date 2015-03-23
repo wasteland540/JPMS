@@ -1,6 +1,7 @@
 package jpms.view;
 
 import com.google.inject.Inject;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
@@ -140,10 +141,10 @@ public class MainView extends AbstractView implements Initializable, IBasicView 
             }
         });
     }
-        
+    
     @FXML
     private void handleFileCreatePdfMenuAction(ActionEvent event){
-        
+        viewModel.showPdf();
     }
     
     @FXML
