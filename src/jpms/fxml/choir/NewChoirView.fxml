@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -28,7 +29,15 @@
         </rowConstraints>
          <children>
             <Label text="Name of the choir:" GridPane.valignment="TOP" />
-            <Button fx:id="createBtn" onAction="#handleCreateBtnAction" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Create" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Button fx:id="createBtn" onAction="#handleCreateBtnAction" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Create" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" >
+                <graphic>
+                    <ImageView>
+                        <image>
+                            <Image url="resources/images/button/add2.png" />
+                        </image>
+                    </ImageView>
+                </graphic>            
+            </Button>
             <TextField fx:id="choirNameField" GridPane.columnIndex="1" GridPane.valignment="TOP" />
             <Label fx:id="errorMsgLbl" text="This name is already in use!" textFill="RED" visible="false" GridPane.columnIndex="1" GridPane.valignment="BOTTOM" />
          </children>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -22,7 +23,15 @@
       <TextField fx:id="oldChoirNameField" disable="true" layoutX="263.0" layoutY="69.0" prefHeight="25.0" prefWidth="200.0" />
       <Label layoutX="263.0" layoutY="103.0" text="New Name:" />
       <TextField fx:id="newChoirNameField" layoutX="263.0" layoutY="120.0" prefHeight="25.0" prefWidth="200.0" />
-      <Button fx:id="renameBtn" onAction="#handleRenameBtnAction" layoutX="363.0" layoutY="172.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Rename" />
+      <Button fx:id="renameBtn" onAction="#handleRenameBtnAction" layoutX="363.0" layoutY="172.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Rename" >
+        <graphic>
+            <ImageView>
+                <image>
+                    <Image url="resources/images/button/disk_blue.png" />
+                </image>
+            </ImageView>
+        </graphic>
+      </Button>
       <Label fx:id="errorMsgLbl" layoutX="263.0" layoutY="145.0" text="This name already in use!" textFill="RED" visible="false" />
    </children>
 </AnchorPane>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -20,7 +21,15 @@
       <ListView fx:id="choirListView" layoutX="21.0" layoutY="69.0" prefHeight="299.0" prefWidth="200.0" />
       <ListView fx:id="personListView" layoutX="263.0" layoutY="69.0" prefHeight="299.0" prefWidth="200.0" />
       <Label layoutX="263.0" layoutY="52.0" text="Persons in this choir:" />
-      <Button fx:id="deleteBtn" layoutX="121.0" layoutY="376.0" mnemonicParsing="false" onAction="#handleDeleteBtnAction" prefHeight="25.0" prefWidth="100.0" text="Delete" />
+      <Button fx:id="deleteBtn" layoutX="121.0" layoutY="376.0" mnemonicParsing="false" onAction="#handleDeleteBtnAction" prefHeight="25.0" prefWidth="100.0" text="Delete">
+        <graphic>
+            <ImageView>
+                <image>
+                    <Image url="resources/images/button/delete2.png" />
+                </image>
+            </ImageView>
+        </graphic>
+      </Button>
       <Label layoutX="263.0" layoutY="368.0" prefHeight="37.0" prefWidth="200.0" text="Note: You can only delete choirs without linked persons!" textFill="#5da128" wrapText="true" />
    </children>
 </AnchorPane>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -38,7 +39,23 @@
             <Label fx:id="dateErrorMsg" text="No vaild date!" textFill="RED" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
          </children>
       </GridPane>
-      <Button fx:id="addBtn" layoutX="382.0" layoutY="359.0" mnemonicParsing="false" onAction="#handleAddBtnAction" prefHeight="25.0" prefWidth="75.0" text="Add" />
-      <Button fx:id="deleteFeeBtn" onAction="#handleRemoveBtnAction" layoutX="286.0" layoutY="359.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Remove" />
+      <Button fx:id="addBtn" layoutX="382.0" layoutY="359.0" mnemonicParsing="false" onAction="#handleAddBtnAction" prefHeight="25.0" prefWidth="75.0" text="">
+        <graphic>
+            <ImageView>
+                <image>
+                    <Image url="resources/images/button/add2.png" />
+                </image>
+            </ImageView>
+        </graphic> 
+      </Button>
+      <Button fx:id="deleteFeeBtn" onAction="#handleRemoveBtnAction" layoutX="286.0" layoutY="359.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="">
+        <graphic>
+              <ImageView>
+                <image>
+                    <Image url="resources/images/button/delete2.png" />
+                </image>
+            </ImageView>
+        </graphic> 
+      </Button>
    </children>
 </AnchorPane>

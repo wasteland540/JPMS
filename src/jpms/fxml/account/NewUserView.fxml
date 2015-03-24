@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -29,7 +30,15 @@
             <TextField fx:id="loginnameField" GridPane.columnIndex="1" />
             <PasswordField fx:id="password1Field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <PasswordField fx:id="password2Field" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="createUserBtn" mnemonicParsing="false" onAction="#handleCreateUserBtnAction" text="Create new User" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="createUserBtn" mnemonicParsing="false" onAction="#handleCreateUserBtnAction" text="Create new User" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                <graphic>
+                  <ImageView>
+                      <image>
+                          <Image url="resources/images/button/add2.png" />
+                      </image>
+                  </ImageView>
+                </graphic>
+            </Button>
             <Label fx:id="errorMsgLbl2" text="The passwords do not match!" textFill="RED" visible="false" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="TOP" />
          </children>
       </GridPane>

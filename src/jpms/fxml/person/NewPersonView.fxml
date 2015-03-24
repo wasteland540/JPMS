@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -110,11 +111,27 @@
          <children>
             <Label text="Type:" />
             <Label text="Value:" GridPane.rowIndex="1" />
-            <Button fx:id="addContactBtn" mnemonicParsing="false" onAction="#handleAddContactBtnAction" prefHeight="25.0" prefWidth="90.0" text="Add Contact" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+            <Button fx:id="addContactBtn" mnemonicParsing="false" onAction="#handleAddContactBtnAction" prefHeight="25.0" prefWidth="90.0" text="Add" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                <graphic>
+                    <ImageView>
+                        <image>
+                            <Image url="resources/images/button/add2.png" />
+                        </image>
+                    </ImageView>
+                </graphic> 
+            </Button>
             <TextField fx:id="contactValueField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <ComboBox fx:id="contactTypeCb" prefHeight="25.0" prefWidth="183.0" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <Button fx:id="saveBtn" layoutX="559.0" layoutY="603.0" mnemonicParsing="false" onAction="#handleSaveBtnAction" prefHeight="25.0" prefWidth="90.0" text="Save" />
+      <Button fx:id="saveBtn" layoutX="559.0" layoutY="603.0" mnemonicParsing="false" onAction="#handleSaveBtnAction" prefHeight="25.0" prefWidth="90.0" text="Save">
+        <graphic>
+            <ImageView>
+                <image>
+                    <Image url="resources/images/button/disk_blue.png" />
+                </image>
+            </ImageView>
+        </graphic> 
+      </Button>
    </children>
 </AnchorPane>
