@@ -88,6 +88,13 @@ public class PersonService extends AbstractService implements IPersonService {
         query.setParameter("active", !passive);
         query.setParameter("choirId", choirId);
         query.setParameter("searchText", "%" + searchText + "%");
+        
+        int searchTextInt = -1;
+        try {
+            searchTextInt = Integer.parseInt(searchText);
+        }
+        catch(Exception e){}
+        query.setParameter("searchTextInt", searchTextInt);
                 
         resultList = query.getResultList();
         

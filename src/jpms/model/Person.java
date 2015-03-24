@@ -38,7 +38,7 @@ import javax.persistence.Temporal;
                                    + "AND g.id = :choirId "
                                    + "AND (p.firstname LIKE :searchText "
                                         + "OR p.lastname LIKE :searchText "
-                                        + "OR a.zipcode LIKE :searchText "
+                                        + "OR a.zipcode LIKE :searchTextInt "
                                         + "OR a.city LIKE :searchText)")})
 public class Person implements Serializable {
     
