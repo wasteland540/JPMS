@@ -43,7 +43,6 @@ public class ViewModule extends AbstractModule {
         bind(SetPassivPersonView.class).toInstance((SetPassivPersonView) loadController("/jpms/fxml/person/SetPassivPersonView.fxml"));
         
         bind(DuesView.class).toInstance((DuesView) loadController("/jpms/fxml/dues/DuesView.fxml"));
-        //TODO: bind all views
         
         //dialogs:
         bind(SimpleDialog.class).toInstance((SimpleDialog) loadController("/jpms/fxml/dialogs/SimpleDialog.fxml"));

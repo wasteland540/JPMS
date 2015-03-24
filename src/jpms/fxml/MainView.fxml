@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -12,37 +13,168 @@
       <MenuBar prefHeight="25.0" prefWidth="1096.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
+            <graphic>
+                <ImageView>
+                    <image>
+                        <Image url="resources/images/menu/document.png" />
+                    </image>
+                </ImageView>
+            </graphic>
             <items>
-              <MenuItem mnemonicParsing="false" text="Create PDF" onAction="#handleFileCreatePdfMenuAction" />
+              <MenuItem mnemonicParsing="false" onAction="#handleFileCreatePdfMenuAction" text="Create PDF">
+                <graphic>
+                  <ImageView>
+                      <image>
+                          <Image url="resources/images/menu/application-pdf-2.png" />
+                      </image>
+                  </ImageView>
+                </graphic>
+              </MenuItem>    
               <SeparatorMenuItem />
-              <MenuItem mnemonicParsing="false" text="Close" onAction="#handleFileCloseMenuAction" />
+              <MenuItem mnemonicParsing="false" onAction="#handleFileCloseMenuAction" text="Close">
+                <graphic>
+                  <ImageView>
+                      <image>
+                          <Image url="resources/images/menu/door2.png" />
+                      </image>
+                  </ImageView>
+                </graphic>
+              </MenuItem>
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Choirs">
+            <graphic>
+                <ImageView>
+                    <image>
+                        <Image url="resources/images/menu/users3.png" />
+                    </image>
+                </ImageView>
+            </graphic>
             <items>
-                <MenuItem mnemonicParsing="false" text="New" onAction="#handleChoirsNewMenuAction" />
-                <MenuItem mnemonicParsing="false" text="Rename" onAction="#handleChoirsEditMenuAction" />
-                <MenuItem mnemonicParsing="false" text="Delete" onAction="#handleChoirsDeleteMenuAction" />
+                <MenuItem mnemonicParsing="false" onAction="#handleChoirsNewMenuAction" text="New">
+                    <graphic>
+                        <ImageView>
+                            <image>
+                                <Image url="resources/images/menu/users3_add.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </MenuItem>
+                <MenuItem mnemonicParsing="false" onAction="#handleChoirsEditMenuAction" text="Rename">
+                    <graphic>
+                        <ImageView>
+                            <image>
+                                <Image url="resources/images/menu/users3_edit.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </MenuItem>
+                <MenuItem mnemonicParsing="false" onAction="#handleChoirsDeleteMenuAction" text="Delete">
+                    <graphic>
+                        <ImageView>
+                            <image>
+                                <Image url="resources/images/menu/users3_delete.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </MenuItem>
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Members">
+            <graphic>
+                <ImageView>
+                    <image>
+                        <Image url="resources/images/menu/user1.png" />
+                    </image>
+                </ImageView>
+            </graphic>
             <items>
-              <MenuItem mnemonicParsing="false" text="New" onAction="#handleMembersNewMenuAction" />
-              <MenuItem mnemonicParsing="false" text="Edit" onAction="#handleMembersEditMenuAction" />
-              <MenuItem mnemonicParsing="false" text="Set Passive" onAction="#handleMembersSetPassiveMenuAction" />
+              <MenuItem mnemonicParsing="false" onAction="#handleMembersNewMenuAction" text="New">
+                <graphic>
+                  <ImageView>
+                      <image>
+                          <Image url="resources/images/menu/user1_add.png" />
+                      </image>
+                  </ImageView>
+                </graphic>
+              </MenuItem>
+              <MenuItem mnemonicParsing="false" onAction="#handleMembersEditMenuAction" text="Edit">
+                <graphic>
+                  <ImageView>
+                      <image>
+                          <Image url="resources/images/menu/user1_edit.png" />
+                      </image>
+                  </ImageView>
+                </graphic>
+              </MenuItem>
+              <MenuItem mnemonicParsing="false" onAction="#handleMembersSetPassiveMenuAction" text="Set Passive">
+                <graphic>
+                    <ImageView>
+                        <image>
+                            <Image url="resources/images/menu/user1_hourglas.png" />
+                        </image>
+                    </ImageView>
+                </graphic>
+              </MenuItem>
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Dues">
-              <items>
-                  <MenuItem mnemonicParsing="false" text="Edit Dues" onAction="#handleDuesEditMenuAction" />
-              </items>
+            <graphic>
+                <ImageView>
+                    <image>
+                        <Image url="resources/images/menu/money2.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            <items>
+                <MenuItem mnemonicParsing="false" onAction="#handleDuesEditMenuAction" text="Edit Dues">
+                    <graphic>
+                        <ImageView>
+                            <image>
+                                <Image url="resources/images/menu/money2_edit.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </MenuItem>
+            </items>
           </Menu>
           <Menu mnemonicParsing="false" text="My Account">
+            <graphic>
+                <ImageView>
+                    <image>
+                        <Image url="resources/images/menu/businessman.png" />
+                    </image>
+                </ImageView>
+            </graphic>
             <items>
-              <MenuItem mnemonicParsing="false" text="New User" onAction="#handleAccountNewUserMenuAction" />
-              <MenuItem mnemonicParsing="false" text="Delete User" onAction="#handleAccountDeleteUserMenuAction" />
+              <MenuItem mnemonicParsing="false" onAction="#handleAccountNewUserMenuAction" text="New User">
+                <graphic>
+                  <ImageView>
+                      <image>
+                          <Image url="resources/images/menu/businessman_add.png" />
+                      </image>
+                  </ImageView>
+                </graphic>
+              </MenuItem>
+              <MenuItem mnemonicParsing="false" onAction="#handleAccountDeleteUserMenuAction" text="Delete User">
+                <graphic>
+                  <ImageView>
+                      <image>
+                          <Image url="resources/images/menu/businessman_delete.png" />
+                      </image>
+                  </ImageView>
+                </graphic>
+              </MenuItem>
               <SeparatorMenuItem />
-              <MenuItem mnemonicParsing="false" text="Change Password" onAction="#handleAccountChangePasswordMenuAction" />
+              <MenuItem mnemonicParsing="false" onAction="#handleAccountChangePasswordMenuAction" text="Change Password">
+                <graphic>
+                  <ImageView>
+                      <image>
+                          <Image url="resources/images/menu/lock.png" />
+                      </image>
+                  </ImageView>
+                </graphic>
+              </MenuItem>
             </items>
           </Menu>
         </menus>
@@ -79,5 +211,10 @@
       <Label layoutX="691.0" layoutY="388.0" text="Honor:" />
       <TextField fx:id="selectedBirthdayField" disable="true" layoutX="775.0" layoutY="115.0" prefHeight="25.0" prefWidth="217.0" />
       <TextField fx:id="selectedEntersDateField" disable="true" layoutX="775.0" layoutY="144.0" prefHeight="25.0" prefWidth="217.0" />
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="431.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="resources/images/button/view.png" />
+        </image>
+      </ImageView>
    </children>
 </AnchorPane>
