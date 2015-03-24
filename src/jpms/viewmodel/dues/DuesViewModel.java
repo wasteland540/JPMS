@@ -17,12 +17,13 @@ import jpms.model.Person;
 import jpms.services.IDuesService;
 import jpms.services.IPersonService;
 import jpms.util.RegExValidator;
+import jpms.viewmodel.AbstractBaseViewModel;
 
 /**
  *
  * @author m.elz
  */
-public class DuesViewModel {
+public class DuesViewModel extends AbstractBaseViewModel {
     
     @Inject
     private IPersonService personService; 
@@ -48,7 +49,9 @@ public class DuesViewModel {
         isDateVaild.setValue(isVaild);
     }
     
-    public void addFee() throws ParseException {
+    public boolean addFee() throws ParseException {
+        boolean isAdded = false;
+        
         if(getSelectedPerson() != null){
             double amountVal = Double.parseDouble(amount.get().replace(',', '.'));
             Date settledAtVal = dateFormat.parse(settledAt.get());
@@ -59,20 +62,28 @@ public class DuesViewModel {
             fee.setPerson(getSelectedPerson());
             
             duesService.addFee(fee);
+            isAdded = true;
             
             amount.setValue("");
             settledAt.setValue("");
             
             reloadFeeList();
         }
+        
+        return isAdded;
     }
     
-    public void removeFee(){
+    public boolean removeFee(){
+        boolean isRemoved = false;
+        
         if(getSelectedFee() != null){
             duesService.deleteFee(getSelectedFee());
+            isRemoved = true;
             
             reloadFeeList();
         }
+        
+        return isRemoved;
     }
     
     private void reloadMemberList(){

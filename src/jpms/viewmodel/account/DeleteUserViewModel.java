@@ -21,12 +21,17 @@ public class DeleteUserViewModel extends AbstractBaseViewModel {
     private PmsUser selectedUser;
     private ObservableList<PmsUser> userlist;
         
-    public void deleteUser(){
+    public boolean deleteUser(){
+        boolean isDeleted = false;
+        
         if(selectedUser != null){
             userService.deleteUser(selectedUser.getId());
             
             userlist.remove(selectedUser);
+            isDeleted = true;
         }
+        
+        return isDeleted;
     }
     
     public ObservableList getUserlist() {

@@ -6,8 +6,6 @@ import java.text.ParseException;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -21,6 +19,8 @@ import jpms.model.Fee;
 import jpms.model.Person;
 import jpms.view.AbstractView;
 import jpms.view.IBasicView;
+import jpms.view.dialogs.DialogIcon;
+import jpms.view.dialogs.SimpleDialog;
 import jpms.viewmodel.dues.DuesViewModel;
 
 /**
@@ -115,7 +115,16 @@ public class DuesView extends AbstractView implements Initializable, IBasicView 
     
     @FXML
     private void handleAddBtnAction() throws ParseException {
-        viewModel.addFee();
+        boolean isAdded = viewModel.addFee();
+        
+        if(isAdded){
+            //notify user
+            viewModel.showDialog(SimpleDialog.class, DialogIcon.INFO, "Fee added!");
+        }
+        else {
+            //notify user
+            viewModel.showDialog(SimpleDialog.class, DialogIcon.WARN, "Please select a member!");
+        }            
     }
     
     @FXML

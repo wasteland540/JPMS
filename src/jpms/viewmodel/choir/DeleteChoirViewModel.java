@@ -26,8 +26,7 @@ public class DeleteChoirViewModel extends AbstractBaseViewModel {
     private ObservableList<PersonGroup> choirlist;
     
     private final BooleanProperty hasLinkedPersons = new SimpleBooleanProperty();
-  
-    
+      
     public boolean delete() throws IOException{
         boolean deleted = choirService.delete(getSelectedChoir().getId());
         

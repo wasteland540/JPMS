@@ -80,11 +80,7 @@ public class NewPersonViewModel extends AbstractPersonBaseViewModel {
             comm.setPerson(person);
         }
         person.getCommunications().addAll(getCommunications());
-                        
-//        for(PersonGroup pg : choirs){
-//            pg.getPersons().add(person);
-//            person.getPersonGroups().add(pg);
-//        }        
+                              
         getChoir().getPersons().add(person);
         person.getPersonGroups().add(getChoir());
                 

@@ -7,8 +7,6 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import jpms.messaging.ViewModelMessage;
-import jpms.messaging.ViewModelQueue;
 import jpms.services.IChoirService;
 import jpms.viewmodel.AbstractBaseViewModel;
 
@@ -38,10 +36,6 @@ public class NewChoirViewModel extends AbstractBaseViewModel {
     
     public boolean create() throws IOException{
         boolean created = choirService.createChoir(choirName.get());
-        
-        if(created){
-            sendMessage(ViewModelQueue.NEW_CHOIR_ADDED_QUEUE.name(), ViewModelMessage.NEW_CHOIR_ADDED.name());
-        }
         
         return created;
     }

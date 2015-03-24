@@ -1,19 +1,10 @@
 package jpms.viewmodel;
 
-import com.rabbitmq.client.AMQP;
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
-import com.rabbitmq.client.DefaultConsumer;
-import com.rabbitmq.client.Envelope;
-import java.io.IOException;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import jpms.callback.MessageCallBack;
-import jpms.messaging.ViewModelMessage;
 import jpms.view.IBasicView;
 import jpms.view.dialogs.DialogIcon;
 import jpms.view.dialogs.IBasicDialog;
@@ -23,9 +14,6 @@ import jpms.view.dialogs.IBasicDialog;
  * @author m.elz
  */
 public abstract class AbstractBaseViewModel {
-        
-    private  Connection connection;
-    private Channel channel;
     
     //TODO: showModualStage and showDialog method refactor
     
@@ -89,68 +77,6 @@ public abstract class AbstractBaseViewModel {
             dialogStage.setScene(scene);
             dialogStage.show();
         }
-    }
-    
-    //TODO: messaging evtl. nit benötigt?!
-    protected void sendMessage(String queueName, String msg) throws IOException{
-        setupMessageConnection();
-        
-        channel.basicPublish("", queueName, null, msg.getBytes());
-        
-        closeMessageConnection();
-    }
-    
-    protected void receiveMessage(String queueName, final MessageCallBack callback) throws IOException, InterruptedException{
-        setupMessageConnection();
-        
-        channel.queueDeclare(queueName, false, false, false, null);
-        
-        channel.basicConsume(queueName, false, new DefaultConsumer(channel){
-            @Override
-            public void handleDelivery(String consumerTAg,
-                                       Envelope envelope,
-                                       AMQP.BasicProperties properties,
-                                       byte[] body) throws IOException
-            {
-                String routingKey = envelope.getRoutingKey();
-                String contentType = properties.getContentType();
-                long deliveryTag = envelope.getDeliveryTag();
-                
-                // (process the message components here ...)
-                String msg = new String(body);
-                
-                if(msg.equals(ViewModelMessage.NEW_USER_ADDED.name())){
-                    callback.execute(ViewModelMessage.NEW_USER_ADDED);
-                } else if(msg.equals(ViewModelMessage.NEW_CHOIR_ADDED.name())){
-                    callback.execute(ViewModelMessage.NEW_CHOIR_ADDED);
-                } else if(msg.equals(ViewModelMessage.CHOIR_DELETED.name())){
-                    callback.execute(ViewModelMessage.CHOIR_DELETED);
-                }
-                
-                channel.basicAck(deliveryTag, false);
-            }
-        });
-    }
-    
-    private void setupMessageConnection() throws IOException{
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
-        
-        connection = factory.newConnection();
-        channel = connection.createChannel();
-    }
-    
-    private void closeMessageConnection() throws IOException{
-        channel.close();
-        connection.close();
-    }
-
-    public Connection getConnection() {
-        return connection;
-    }
-
-    public Channel getChannel() {
-        return channel;
     }
     
 }

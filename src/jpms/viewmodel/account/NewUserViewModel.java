@@ -7,8 +7,6 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import jpms.messaging.ViewModelMessage;
-import jpms.messaging.ViewModelQueue;
 import jpms.services.IUserService;
 import jpms.viewmodel.AbstractBaseViewModel;
 
@@ -47,11 +45,7 @@ public class NewUserViewModel extends AbstractBaseViewModel{
         boolean isCreated;
         
         isCreated = userService.createUser(loginname.get(), password1.get());
-        
-        if(isCreated){
-            sendMessage(ViewModelQueue.NEW_USER_ADDED_QUEUE.name(), ViewModelMessage.NEW_USER_ADDED.name());
-        }
-        
+                
         return isCreated;
     }
     

@@ -7,8 +7,6 @@ import javafx.collections.ObservableList;
 import jpms.model.Communication;
 import jpms.model.Person;
 import jpms.model.PersonGroup;
-import jpms.view.dialogs.DialogIcon;
-import jpms.view.dialogs.SimpleDialog;
 import jpms.view.person.AbstractPersonBaseViewModel;
 
 /**
@@ -63,7 +61,7 @@ public class EditPersonViewModel extends AbstractPersonBaseViewModel {
         }
     }
 
-    public void save() throws ParseException {
+    public boolean save() throws ParseException {
         //update person data
         getSelectedMember().setAge(Integer.parseInt(ageProperty().get()));
         getSelectedMember().setBirthday(dateFormat.parse(birthdayProperty().get()));
@@ -83,12 +81,11 @@ public class EditPersonViewModel extends AbstractPersonBaseViewModel {
         getSelectedMember().getAdditionalInfo().setHonor(honorProperty().get());        
         
         //persit changes
-        personService.save(getSelectedMember());
+        boolean isSaved = personService.save(getSelectedMember());
         
         reloadMemberList();
         
-        //inform user
-        showDialog(SimpleDialog.class, DialogIcon.INFO, "Changes saved!");
+        return isSaved;
     }
 
     public ObservableList<Person> getMemberList() {
@@ -163,13 +160,8 @@ public class EditPersonViewModel extends AbstractPersonBaseViewModel {
                 getCommunications().addAll(selectedMember.getCommunications());
             }
             else{
-                //communications = FXCollections.observableArrayList(selectedMember.getCommunications());
                 setCommunications(FXCollections.observableArrayList(selectedMember.getCommunications()));
             }
-        }
-        else {
-            //communications = FXCollections.observableArrayList();
-            //setCommunications(FXCollections.observableArrayList<Communication>());
         }
     }
     

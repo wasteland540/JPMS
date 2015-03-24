@@ -49,23 +49,6 @@ public class JPMS extends Application {
         stage.show();
     }
     
-    @Override
-    public void stop(){
-        //every class with starts a consumer, from rabbitMQ, have to close there channel and connection on application exit!
-        //note: this only works, because all viewmodels will be singletons..
-        //note 2: --> every class with will start a consumer have to be a singleton!
-        //TODO: refactoring!  
-        
-//        try {
-//            DeleteUserViewModel viewModel = injector.getInstance(DeleteUserViewModel.class);
-//            
-//            viewModel.getChannel().close();
-//            viewModel.getConnection().close();
-//        } catch (IOException ex) {
-//            Logger.getLogger(JPMS.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-    }
-    
     /**
      * @param args the command line arguments
      */

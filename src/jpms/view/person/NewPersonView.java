@@ -234,7 +234,7 @@ public class NewPersonView extends AbstractView implements Initializable, IBasic
             viewModel.reset();
             
             //notify user
-            viewModel.showDialog(SimpleDialog.class, DialogIcon.INFO, "Member was saved!");
+            viewModel.showDialog(SimpleDialog.class, DialogIcon.INFO, "Member saved!");
             
             // close the dialog.
             Stage stage  = (Stage) getView().getScene().getWindow();

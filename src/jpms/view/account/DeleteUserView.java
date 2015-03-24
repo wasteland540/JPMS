@@ -14,6 +14,8 @@ import javafx.scene.control.SelectionMode;
 import jpms.model.PmsUser;
 import jpms.view.AbstractView;
 import jpms.view.IBasicView;
+import jpms.view.dialogs.DialogIcon;
+import jpms.view.dialogs.SimpleDialog;
 import jpms.viewmodel.account.DeleteUserViewModel;
 
 /**
@@ -62,8 +64,16 @@ public class DeleteUserView extends AbstractView implements Initializable, IBasi
 
     @FXML
     private void handleDeleteBtnAction(ActionEvent event){
-        viewModel.deleteUser();
+        boolean isDeleted = viewModel.deleteUser();
+        
+        if(isDeleted){
+            //notify user
+            viewModel.showDialog(SimpleDialog.class, DialogIcon.INFO, "User deleted!");
+        }
+        else {
+            //notify user
+            viewModel.showDialog(SimpleDialog.class, DialogIcon.WARN, "Ups, sorry! Something went wrong. Please try again!");
+        }
     }
-    
-    
+        
 }

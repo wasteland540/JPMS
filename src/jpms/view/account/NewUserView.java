@@ -18,6 +18,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import jpms.view.AbstractView;
 import jpms.view.IBasicView;
+import jpms.view.dialogs.DialogIcon;
+import jpms.view.dialogs.SimpleDialog;
 import jpms.viewmodel.account.NewUserViewModel;
 
 /**
@@ -112,9 +114,16 @@ public class NewUserView extends AbstractView implements Initializable, IBasicVi
             //clear field, for reuse
             viewModel.reset();
             
+            //notify user
+            viewModel.showDialog(SimpleDialog.class, DialogIcon.INFO, "User created!");
+            
             // close the dialog.
             Stage stage  = (Stage) getView().getScene().getWindow();
             stage.close();            
+        }
+        else {
+            //notify user
+            viewModel.showDialog(SimpleDialog.class, DialogIcon.WARN, "Ups, sorry! Something went wrong. Please try again!");
         }
     }
 }

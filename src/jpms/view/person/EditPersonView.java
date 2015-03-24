@@ -27,6 +27,8 @@ import jpms.model.SalutationType;
 import jpms.model.VoiceType;
 import jpms.view.AbstractView;
 import jpms.view.IBasicView;
+import jpms.view.dialogs.DialogIcon;
+import jpms.view.dialogs.SimpleDialog;
 import jpms.viewmodel.person.EditPersonViewModel;
 import jpms.viewmodel.person.NewPersonViewModel;
 
@@ -305,6 +307,15 @@ public class EditPersonView extends AbstractView implements Initializable, IBasi
     
     @FXML
     private void handleSaveAction(ActionEvent event) throws ParseException {
-        viewModel.save();
+        boolean isSaved = viewModel.save();
+        
+        if(isSaved){
+            //notify user
+            viewModel.showDialog(SimpleDialog.class, DialogIcon.INFO, "Changes saved!");
+        }
+        else {
+            //notify user
+            viewModel.showDialog(SimpleDialog.class, DialogIcon.WARN, "Ups, sorry! Something went wrong. Please try again!");
+        }
     }
 }
