@@ -1,6 +1,10 @@
 package jpms.util.reports;
 
+import java.text.Collator;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import jpms.util.reports.helperbeans.ReportPerson;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 
@@ -10,6 +14,8 @@ import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.dynamicreports.examples.Templates;
 import static net.sf.dynamicreports.examples.Templates.boldStyle;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
+import net.sf.dynamicreports.report.constant.GroupHeaderLayout;
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
 
@@ -39,6 +45,7 @@ public class DefaultMemberlistReport {
     private static final String contactValueHeader = "Value";
 
     //fieldNames
+    private static final String groupField = "group";
     private static final String firstnameField = "firstname";
     private static final String lastnameField = "lastname";
     private static final String ageField = "age";
@@ -56,14 +63,26 @@ public class DefaultMemberlistReport {
     public void show(List<ReportPerson> memberlist) {
         SubreportBuilder subReport = cmp.subreport(createSubReport())
                 .setDataSource(exp.subDatasourceBeanCollection("contacts"));
+        
+        //we have to sort our datasource, otherwise there groupby method did not work...
+        Collections.sort(memberlist, new Comparator<ReportPerson>() {
+            @Override
+            public int compare(ReportPerson o1, ReportPerson o2) {
+                Collator collator = Collator.getInstance(Locale.GERMAN);
+                return collator.compare(o1.getGroup(), o2.getGroup());
+            }
+        });
 
         try {
-            TextColumnBuilder<String> groupColumn = col.column("Choir", "group", type.stringType()).setStyle(boldStyle);
+            TextColumnBuilder<String> groupColumn = col.column(groupField, type.stringType()).setStyle(boldStyle);
+            
+            ColumnGroupBuilder itemGroup = grp.group(groupColumn)
+                                                .setHeaderLayout(GroupHeaderLayout.VALUE);
             
             report().setPageFormat(PageType.A4, PageOrientation.LANDSCAPE)
                     .setTemplate(Templates.reportTemplate)
                     .title(Templates.createTitleComponent(memberlistTitle))
-                    .columns(groupColumn,
+                    .columns(groupColumn, 
                             col.column(firstnameHeader, firstnameField, type.stringType()),
                             col.column(lastnameHeader, lastnameField, type.stringType()),
                             col.column(ageHeader, ageField, type.stringType()),
@@ -81,7 +100,7 @@ public class DefaultMemberlistReport {
                             cmp.line()
                     )
                     .pageFooter(Templates.footerComponent)
-                    .groupBy(groupColumn)
+                    .groupBy(itemGroup)
                     .setDataSource(memberlist)
                     .show(false);
 
@@ -101,4 +120,5 @@ public class DefaultMemberlistReport {
 
         return report;
     }
+
 }
