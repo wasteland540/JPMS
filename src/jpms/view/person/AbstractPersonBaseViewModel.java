@@ -30,7 +30,7 @@ import org.joda.time.Years;
  */
 public class AbstractPersonBaseViewModel extends AbstractBaseViewModel {
     
-    public enum DateType {
+    protected enum DateType {
         BIRTHDAY,
         ENTER_DATE;
     }

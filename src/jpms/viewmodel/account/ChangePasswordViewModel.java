@@ -58,10 +58,6 @@ public class ChangePasswordViewModel extends AbstractBaseViewModel {
         isNewPasswordEqual.setValue(Boolean.TRUE);
     }
     
-    public void showWarnDialog(){
-        showDialog(SimpleDialog.class, DialogIcon.WARN, "Password not changed! Maybe your old password is wrong?");
-    }
-    
     public String getOldPassword() {
         return oldPassword.get();
     }

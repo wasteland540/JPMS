@@ -9,4 +9,5 @@ public enum DialogIcon {
     INFO,
     WARN,
     ERROR;
+    
 }

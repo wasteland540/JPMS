@@ -15,6 +15,8 @@ import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 import jpms.view.AbstractView;
 import jpms.view.IBasicView;
+import jpms.view.dialogs.DialogIcon;
+import jpms.view.dialogs.SimpleDialog;
 import jpms.viewmodel.account.ChangePasswordViewModel;
 
 /**
@@ -99,7 +101,7 @@ public class ChangePasswordView extends AbstractView implements Initializable, I
             stage.close();            
         }
         else {
-            viewModel.showWarnDialog();
+            viewModel.showDialog(SimpleDialog.class, DialogIcon.WARN, "Password not changed! Maybe your old password is wrong?");
         }
     }
     

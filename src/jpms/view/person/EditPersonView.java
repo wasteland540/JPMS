@@ -259,9 +259,7 @@ public class EditPersonView extends AbstractView implements Initializable, IBasi
         });
     }
     
-    private void setSelectedItemsOfComboboxes(){
-        //TODO: generic?!
-        
+    private void setSelectedItemsOfComboboxes(){       
         if(viewModel.getSelectedMember() != null){
             //salutation combobox
             for(SalutationType st : salutationCb.getItems()){

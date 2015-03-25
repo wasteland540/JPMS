@@ -5,7 +5,7 @@ package jpms.util.reports.helperbeans;
  * @author m.elz
  */
 public class ReportContact {
-    
+
     private final String type;
     private final String value;
 
@@ -21,5 +21,5 @@ public class ReportContact {
     public String getValue() {
         return value;
     }
-    
+
 }

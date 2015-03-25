@@ -63,7 +63,7 @@ public class DefaultMemberlistReport {
     public void show(List<ReportPerson> memberlist) {
         SubreportBuilder subReport = cmp.subreport(createSubReport())
                 .setDataSource(exp.subDatasourceBeanCollection("contacts"));
-        
+
         //we have to sort our datasource, otherwise there groupby method did not work...
         Collections.sort(memberlist, new Comparator<ReportPerson>() {
             @Override
@@ -75,14 +75,14 @@ public class DefaultMemberlistReport {
 
         try {
             TextColumnBuilder<String> groupColumn = col.column(groupField, type.stringType()).setStyle(boldStyle);
-            
+
             ColumnGroupBuilder itemGroup = grp.group(groupColumn)
-                                                .setHeaderLayout(GroupHeaderLayout.VALUE);
-            
+                    .setHeaderLayout(GroupHeaderLayout.VALUE);
+
             report().setPageFormat(PageType.A4, PageOrientation.LANDSCAPE)
                     .setTemplate(Templates.reportTemplate)
                     .title(Templates.createTitleComponent(memberlistTitle))
-                    .columns(groupColumn, 
+                    .columns(groupColumn,
                             col.column(firstnameHeader, firstnameField, type.stringType()),
                             col.column(lastnameHeader, lastnameField, type.stringType()),
                             col.column(ageHeader, ageField, type.stringType()),

@@ -201,5 +201,4 @@ public class MainView extends AbstractView implements Initializable, IBasicView 
         viewModel.showChangePasswordView();
     }
 
-
 }

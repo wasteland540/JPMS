@@ -13,8 +13,8 @@ public class RegExValidator {
     public static boolean isVaildDate(String dateString) {
         return dateString.matches(datePattern);
     }
-    
-    public static boolean isVaildZipcode(String zipcodeString){
+
+    public static boolean isVaildZipcode(String zipcodeString) {
         return zipcodeString.matches(zipcodePattern);
     }
 }

@@ -18,6 +18,7 @@ public class DeleteUserViewModel extends AbstractBaseViewModel {
     
     @Inject
     private IUserService userService;
+    
     private PmsUser selectedUser;
     private ObservableList<PmsUser> userlist;
         

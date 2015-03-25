@@ -10,7 +10,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import jpms.services.IUserService;
 import jpms.viewmodel.LoginViewModel;
 
 /**
@@ -33,10 +32,7 @@ public class LoginView implements Initializable, IBasicView {
     
     @FXML
     private Label errorMsgLbl;
-        
-    @Inject
-    private IUserService userService;
-    
+            
     @FXML
     private void handleLoginBtnAction(ActionEvent event) {        
         viewModel.login();
