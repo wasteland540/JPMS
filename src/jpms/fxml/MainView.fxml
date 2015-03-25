@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" fx:id="view" prefHeight="697.0" prefWidth="1096.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jpms.view.MainView">
+<AnchorPane id="AnchorPane" fx:id="view" prefHeight="512.0" prefWidth="1063.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jpms.view.MainView">
    <children>
       <MenuBar prefHeight="25.0" prefWidth="1096.0">
         <menus>

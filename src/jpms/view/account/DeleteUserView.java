@@ -12,8 +12,10 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import jpms.model.PmsUser;
+import jpms.util.dialogs.ConfirmDialogAction;
 import jpms.view.AbstractView;
 import jpms.view.IBasicView;
+import jpms.view.dialogs.ConfirmDialog;
 import jpms.view.dialogs.DialogIcon;
 import jpms.view.dialogs.SimpleDialog;
 import jpms.viewmodel.account.DeleteUserViewModel;
@@ -64,16 +66,26 @@ public class DeleteUserView extends AbstractView implements Initializable, IBasi
 
     @FXML
     private void handleDeleteBtnAction(ActionEvent event){
-        boolean isDeleted = viewModel.deleteUser();
-        
-        if(isDeleted){
-            //notify user
-            viewModel.showDialog(SimpleDialog.class, DialogIcon.INFO, "User deleted!");
-        }
-        else {
-            //notify user
-            viewModel.showDialog(SimpleDialog.class, DialogIcon.WARN, "Ups, sorry! Something went wrong. Please try again!");
-        }
+        viewModel.showDialog(ConfirmDialog.class, null, "Are you sure that you want to delete the selected user?", new ConfirmDialogAction(){
+            @Override
+            public void OnConfirm(){
+                boolean isDeleted = viewModel.deleteUser();
+
+                if(isDeleted){
+                    //notify user
+                    viewModel.showDialog(SimpleDialog.class, DialogIcon.INFO, "User deleted!");
+                }
+                else {
+                    //notify user
+                    viewModel.showDialog(SimpleDialog.class, DialogIcon.WARN, "Ups, sorry! Something went wrong. Please try again!");
+                }
+            }
+
+            @Override
+            public void OnCancel() {
+                
+            }
+        });
     }
         
 }

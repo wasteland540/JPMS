@@ -305,53 +305,7 @@ public class MainViewModel extends AbstractBaseViewModel {
             selectedHonor.setValue(getSelectedPerson().getAdditionalInfo().getHonor());
         }
     }
-    
-    private String createPersonCsvLine(Person person){
-        StringBuilder strBuilder = new StringBuilder();
-        
-        //person data
-        strBuilder.append(person.getLastname());
-        strBuilder.append(";");
-        strBuilder.append(person.getFirstname());
-        strBuilder.append(";");
-        strBuilder.append(person.getAge());
-        strBuilder.append(";");
-        strBuilder.append(dateFormat.format(person.getBirthday()));
-        strBuilder.append(";");
-        strBuilder.append(dateFormat.format(person.getDateOfEnters()));
-        strBuilder.append(";");
-        strBuilder.append("\n");
-        
-        //address data
-        strBuilder.append("");
-        strBuilder.append(";");
-        strBuilder.append(person.getAdress().getStreet());
-        strBuilder.append(";");
-        strBuilder.append(person.getAdress().getZipcode());
-        strBuilder.append(";");
-        strBuilder.append(person.getAdress().getCity());
-        strBuilder.append(";");
-        strBuilder.append("\n");
-        
-        //additional info
-        strBuilder.append("");
-        strBuilder.append(";");
-        if(person.getAdditionalInfo().getVoice() != null){
-            strBuilder.append(person.getAdditionalInfo().getVoice().name());
-        }
-        else{
-            strBuilder.append("");
-        }
-        strBuilder.append(";");
-        strBuilder.append(person.getAdditionalInfo().getFunctionRole());
-        strBuilder.append(";");
-        strBuilder.append(person.getAdditionalInfo().getHonor());
-        strBuilder.append(";");
-        strBuilder.append("\n");
-        
-        return strBuilder.toString();
-    }
-    
+       
     private List<ReportPerson> createReportList(List<Person> personList){
         List<ReportPerson> reportList = new ArrayList<>();
         

@@ -12,6 +12,7 @@ import jpms.view.account.NewUserView;
 import jpms.view.choir.DeleteChoirView;
 import jpms.view.choir.EditChoirView;
 import jpms.view.choir.NewChoirView;
+import jpms.view.dialogs.ConfirmDialog;
 import jpms.view.dialogs.SimpleDialog;
 import jpms.view.dues.DuesView;
 import jpms.view.person.EditPersonView;
@@ -46,6 +47,7 @@ public class ViewModule extends AbstractModule {
         
         //dialogs:
         bind(SimpleDialog.class).toInstance((SimpleDialog) loadController("/jpms/fxml/dialogs/SimpleDialog.fxml"));
+        bind(ConfirmDialog.class).toInstance((ConfirmDialog) loadController("/jpms/fxml/dialogs/ConfirmDialog.fxml"));
     }
     
     protected Object loadController(String url){

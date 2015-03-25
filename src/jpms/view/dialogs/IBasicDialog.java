@@ -10,6 +10,6 @@ public interface IBasicDialog {
     
     Node getView();
     
-    void setMessage(DialogIcon icon, String message);
+    void setMessage(DialogIcon icon, String message);   
     
 }

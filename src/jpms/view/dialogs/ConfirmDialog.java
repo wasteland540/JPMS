@@ -11,13 +11,14 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import jpms.util.dialogs.ConfirmDialogAction;
 
 /**
  * FXML Controller class
  *
  * @author m.elz
  */
-public class SimpleDialog implements Initializable, IBasicDialog {
+public class ConfirmDialog implements Initializable, IBasicDialog, IConfirmDialog {
 
     @FXML
     private Node view;
@@ -27,6 +28,8 @@ public class SimpleDialog implements Initializable, IBasicDialog {
     
     @FXML
     private ImageView iconImageView;
+
+    private ConfirmDialogAction confirmDialogAction;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -37,14 +40,14 @@ public class SimpleDialog implements Initializable, IBasicDialog {
     public Node getView() {
         return view;
     }
-    
+
     @Override
     public void setMessage(DialogIcon icon, String message) {
         messageLbl.textProperty().set(message);
         
-        if(icon != null){
-            InputStream iconStream = null;
-            
+        InputStream iconStream = null;
+        
+        if(icon != null){           
             if(icon == DialogIcon.INFO){
                 iconStream = getClass().getResourceAsStream("/resources/images/about.png");
             }
@@ -54,17 +57,35 @@ public class SimpleDialog implements Initializable, IBasicDialog {
             else if(icon == DialogIcon.ERROR){
                 iconStream = getClass().getResourceAsStream("/resources/images/stop.png");
             }
-            
-            if(iconStream != null){
-                iconImageView.setImage(new Image(iconStream));
-            }
+        }
+        else {
+            iconStream = getClass().getResourceAsStream("/resources/images/help2.png");
+        }
+        
+        if(iconStream != null){
+            iconImageView.setImage(new Image(iconStream));
         }
     }
     
     @FXML
-    private void handleOkBtnAction(ActionEvent event){
-         Stage stage  = (Stage) messageLbl.getScene().getWindow();
-         stage.close();
+    private void handleYesBtnAction(ActionEvent event){
+        confirmDialogAction.OnConfirm();
+        
+        Stage stage  = (Stage) view.getScene().getWindow();
+        stage.close();
+    }
+    
+    @FXML
+    private void handleNoBtnAction(ActionEvent event){
+        confirmDialogAction.OnCancel();
+        
+        Stage stage  = (Stage) view.getScene().getWindow();
+        stage.close();
     }
 
+    @Override
+    public void setConfirmAction(ConfirmDialogAction confirmDialogAction) {
+        this.confirmDialogAction = confirmDialogAction;
+    }
+    
 }

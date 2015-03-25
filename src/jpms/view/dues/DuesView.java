@@ -17,8 +17,10 @@ import javafx.scene.control.TextField;
 import jpms.listeners.changelistener.OnlyNumberTextFieldFilter;
 import jpms.model.Fee;
 import jpms.model.Person;
+import jpms.util.dialogs.ConfirmDialogAction;
 import jpms.view.AbstractView;
 import jpms.view.IBasicView;
+import jpms.view.dialogs.ConfirmDialog;
 import jpms.view.dialogs.DialogIcon;
 import jpms.view.dialogs.SimpleDialog;
 import jpms.viewmodel.dues.DuesViewModel;
@@ -129,9 +131,26 @@ public class DuesView extends AbstractView implements Initializable, IBasicView 
     
     @FXML
     private void handleRemoveBtnAction() throws ParseException {
-        viewModel.removeFee();
+        viewModel.showDialog(ConfirmDialog.class, null, "Are you sure that you want delete the selected fee?", new ConfirmDialogAction() {
+            @Override
+            public void OnConfirm() {
+                boolean isRemoved = viewModel.removeFee();
+        
+                if(isRemoved){
+                    //notify user
+                    viewModel.showDialog(SimpleDialog.class, DialogIcon.INFO, "Fee deleted!");
+                }
+                else {
+                    //notify user
+                    viewModel.showDialog(SimpleDialog.class, DialogIcon.WARN, "Please select a member!");
+                }
+            }
+
+            @Override
+            public void OnCancel() {
+                
+            }
+        }); 
     }
 
-    
-    
 }
