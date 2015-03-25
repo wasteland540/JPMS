@@ -52,9 +52,9 @@ public class AbstractPersonBaseViewModel extends AbstractBaseViewModel {
     private final StringProperty functionRole = new SimpleStringProperty();
     private final StringProperty honor = new SimpleStringProperty();
     private final StringProperty communicationValue = new SimpleStringProperty();
-    private final BooleanProperty isBirthdayDateVaild = new SimpleBooleanProperty(true);
-    private final BooleanProperty isEnterDateVaild = new SimpleBooleanProperty(true);
-    private final BooleanProperty isZipcodeVaild = new SimpleBooleanProperty(true);
+    private final BooleanProperty isBirthdayDateVaild = new SimpleBooleanProperty(false);
+    private final BooleanProperty isEnterDateVaild = new SimpleBooleanProperty(false);
+    private final BooleanProperty isZipcodeVaild = new SimpleBooleanProperty(false);
 
     private SalutationType salutation;
     private VoiceType voice;
