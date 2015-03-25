@@ -144,6 +144,8 @@ public class NewPersonView extends AbstractView implements Initializable, IBasic
         choirCb.getItems().setAll(viewModel.getChoirlist());
         
         setupListeners();
+        
+        viewModel.setDefaults();
     }
 
     @Override

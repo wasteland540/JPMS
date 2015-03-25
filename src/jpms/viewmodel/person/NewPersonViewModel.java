@@ -4,7 +4,10 @@ import java.text.ParseException;
 import jpms.model.AdditionalInfo;
 import jpms.model.Adress;
 import jpms.model.Communication;
+import jpms.model.CommunicationTyp;
 import jpms.model.Person;
+import jpms.model.SalutationType;
+import jpms.model.VoiceType;
 import jpms.view.person.AbstractPersonBaseViewModel;
 
 /**
@@ -13,6 +16,14 @@ import jpms.view.person.AbstractPersonBaseViewModel;
  */
 public class NewPersonViewModel extends AbstractPersonBaseViewModel {
         
+    public void setDefaults(){
+        //set default values for comboboxes, in case the user did not change them
+        setSalutation(SalutationType.values()[0]);
+        setVoice(VoiceType.values()[0]);
+        setCommunicationTyp(CommunicationTyp.values()[0]);
+        setChoir(getChoirlist().get(0));
+    }
+    
     public void addContact(){
         Communication communication = new Communication();
         communication.setCommunicationTyp(getCommunicationTyp());
@@ -86,5 +97,5 @@ public class NewPersonViewModel extends AbstractPersonBaseViewModel {
                 
         return person;
     }
-        
+    
 }
