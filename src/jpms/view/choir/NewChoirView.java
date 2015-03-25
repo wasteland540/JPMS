@@ -14,8 +14,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import jpms.util.dialogs.RefreshMainViewAction;
 import jpms.view.AbstractView;
 import jpms.view.IBasicView;
+import jpms.view.IMainViewRefreshable;
 import jpms.view.dialogs.DialogIcon;
 import jpms.view.dialogs.SimpleDialog;
 import jpms.viewmodel.choir.NewChoirViewModel;
@@ -25,7 +27,7 @@ import jpms.viewmodel.choir.NewChoirViewModel;
  *
  * @author m.elz
  */
-public class NewChoirView extends AbstractView implements Initializable, IBasicView {
+public class NewChoirView extends AbstractView implements Initializable, IBasicView, IMainViewRefreshable {
     
     @Inject
     private NewChoirViewModel viewModel;
@@ -41,6 +43,8 @@ public class NewChoirView extends AbstractView implements Initializable, IBasicV
     
     @FXML
     private Button createBtn;
+    
+    private RefreshMainViewAction refreshMainViewAction;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -84,6 +88,8 @@ public class NewChoirView extends AbstractView implements Initializable, IBasicV
             //notify user
             viewModel.showDialog(SimpleDialog.class, DialogIcon.INFO, "Choir was created!");
             
+            refreshMainViewAction.Refresh();
+            
             // close the dialog.
             Stage stage  = (Stage) getView().getScene().getWindow();
             stage.close();   
@@ -93,4 +99,10 @@ public class NewChoirView extends AbstractView implements Initializable, IBasicV
             viewModel.showDialog(SimpleDialog.class, DialogIcon.WARN, "Ups, sorry! Something went wrong. Please try again!");
         }
     }
+
+    @Override
+    public void setRefreshAction(RefreshMainViewAction refreshMainViewAction) {
+        this.refreshMainViewAction = refreshMainViewAction;
+    }
+    
 }

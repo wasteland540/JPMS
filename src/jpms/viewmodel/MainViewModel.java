@@ -15,6 +15,7 @@ import jpms.model.Person;
 import jpms.model.PersonGroup;
 import jpms.services.IChoirService;
 import jpms.services.IPersonService;
+import jpms.util.dialogs.RefreshMainViewAction;
 import jpms.util.reports.DefaultMemberlistReport;
 import jpms.util.reports.helperbeans.ReportContact;
 import jpms.util.reports.helperbeans.ReportPerson;
@@ -83,15 +84,30 @@ public class MainViewModel extends AbstractBaseViewModel {
     }
     
     public void newChoir(){
-        showModualStage(NewChoirView.class, newChoirStageKey, "New Choir");
+        showModualStage(NewChoirView.class, newChoirStageKey, "New Choir", new RefreshMainViewAction() {
+            @Override
+            public void Refresh() {
+                reloadChoirs();
+            }
+        });
     }
     
     public void editChoir(){
-        showModualStage(EditChoirView.class, editChoirStageKey, "Rename Choir");
+        showModualStage(EditChoirView.class, editChoirStageKey, "Rename Choir", new RefreshMainViewAction() {
+            @Override
+            public void Refresh() {
+                reloadChoirs();
+            }
+        });
     }
     
     public void deleteChoir(){
-        showModualStage(DeleteChoirView.class, deleteChoirStageKey, "Delete Choir");
+        showModualStage(DeleteChoirView.class, deleteChoirStageKey, "Delete Choir", new RefreshMainViewAction() {
+            @Override
+            public void Refresh() {
+                reloadChoirs();
+            }
+        });
     }
     
     public void newMember(){

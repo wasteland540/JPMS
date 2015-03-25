@@ -1,7 +1,6 @@
 package jpms.view;
 
 import com.google.inject.Inject;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
@@ -101,7 +100,7 @@ public class MainView extends AbstractView implements Initializable, IBasicView 
         selectedHonorField.textProperty().bind(viewModel.selectedHonorProperty());
         
         //dynamic from database
-        choirCb.getItems().addAll(viewModel.getChoirs());
+        choirCb.setItems(viewModel.getChoirs());
         
         //table cell bindings
         lastnameCol.setCellValueFactory(new PropertyValueFactory<Person, String>("lastname"));

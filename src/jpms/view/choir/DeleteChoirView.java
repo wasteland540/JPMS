@@ -18,8 +18,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import jpms.model.Person;
 import jpms.model.PersonGroup;
+import jpms.util.dialogs.RefreshMainViewAction;
 import jpms.view.AbstractView;
 import jpms.view.IBasicView;
+import jpms.view.IMainViewRefreshable;
 import jpms.view.dialogs.DialogIcon;
 import jpms.view.dialogs.SimpleDialog;
 import jpms.viewmodel.choir.DeleteChoirViewModel;
@@ -29,7 +31,7 @@ import jpms.viewmodel.choir.DeleteChoirViewModel;
  *
  * @author m.elz
  */
-public class DeleteChoirView extends AbstractView implements Initializable, IBasicView {
+public class DeleteChoirView extends AbstractView implements Initializable, IBasicView, IMainViewRefreshable {
     
     @Inject
     private DeleteChoirViewModel viewModel;
@@ -45,6 +47,8 @@ public class DeleteChoirView extends AbstractView implements Initializable, IBas
     
     @FXML
     private Button deleteBtn;
+    
+    private RefreshMainViewAction refreshMainViewAction;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -94,6 +98,8 @@ public class DeleteChoirView extends AbstractView implements Initializable, IBas
         if(deleted){
             viewModel.reloadChoirList();
             
+            refreshMainViewAction.Refresh();
+            
             //notify user
             viewModel.showDialog(SimpleDialog.class, DialogIcon.INFO, "Choir deleted!");
         }
@@ -101,5 +107,10 @@ public class DeleteChoirView extends AbstractView implements Initializable, IBas
             //notify user
             viewModel.showDialog(SimpleDialog.class, DialogIcon.WARN, "Ups, sorry! Something went wrong. Please try again!");
         }
+    }
+
+    @Override
+    public void setRefreshAction(RefreshMainViewAction refreshMainViewAction) {
+        this.refreshMainViewAction = refreshMainViewAction;
     }
 }

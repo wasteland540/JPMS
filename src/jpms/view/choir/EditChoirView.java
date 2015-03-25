@@ -15,8 +15,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import jpms.model.PersonGroup;
+import jpms.util.dialogs.RefreshMainViewAction;
 import jpms.view.AbstractView;
 import jpms.view.IBasicView;
+import jpms.view.IMainViewRefreshable;
 import jpms.view.dialogs.DialogIcon;
 import jpms.view.dialogs.SimpleDialog;
 import jpms.viewmodel.choir.EditChoirViewModel;
@@ -26,7 +28,7 @@ import jpms.viewmodel.choir.EditChoirViewModel;
  *
  * @author m.elz
  */
-public class EditChoirView extends AbstractView implements Initializable, IBasicView {
+public class EditChoirView extends AbstractView implements Initializable, IBasicView, IMainViewRefreshable {
     
     @Inject
     private EditChoirViewModel viewModel;
@@ -48,6 +50,8 @@ public class EditChoirView extends AbstractView implements Initializable, IBasic
     
     @FXML
     private Label errorMsgLbl;
+    
+    private RefreshMainViewAction refreshMainViewAction;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -101,6 +105,8 @@ public class EditChoirView extends AbstractView implements Initializable, IBasic
             viewModel.reset();
             viewModel.reloadChoirList();
             
+            refreshMainViewAction.Refresh();
+            
             //notify user
             viewModel.showDialog(SimpleDialog.class, DialogIcon.INFO, "Choir renamed!");
         }
@@ -108,6 +114,11 @@ public class EditChoirView extends AbstractView implements Initializable, IBasic
             //notify user
             viewModel.showDialog(SimpleDialog.class, DialogIcon.WARN, "Ups, sorry! Something went wrong. Please try again!");
         }
+    }
+
+    @Override
+    public void setRefreshAction(RefreshMainViewAction refreshMainViewAction) {
+        this.refreshMainViewAction = refreshMainViewAction;
     }
     
 }
