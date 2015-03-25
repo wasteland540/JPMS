@@ -32,7 +32,7 @@ import jpms.viewmodel.choir.DeleteChoirViewModel;
  * @author m.elz
  */
 public class DeleteChoirView extends AbstractView implements Initializable, IBasicView, IMainViewRefreshable {
-    
+     
     @Inject
     private DeleteChoirViewModel viewModel;
     
@@ -81,7 +81,7 @@ public class DeleteChoirView extends AbstractView implements Initializable, IBas
             public void changed(ObservableValue<? extends PersonGroup> ov, PersonGroup oldValue, PersonGroup newValue) {
                 viewModel.setSelectedChoir(newValue);
                 
-                if(viewModel.getSelectedChoir() != null){
+                if(viewModel.getSelectedChoir() != null){                    
                     List<Person> linkedPersons = viewModel.getSelectedChoir().getPersons();
 
                     personListView.getItems().clear();

@@ -103,5 +103,21 @@ public class ChoirService extends AbstractService implements IChoirService {
         
         return deleted;
     }
+
+    @Override
+    public PersonGroup getChoirById(Long id) {
+        PersonGroup result;
+        
+        startTransaction();
+        
+        result = em.find(PersonGroup.class, id);
+        
+        //needed, another wise the changes on person list will be not refreshed...
+        em.refresh(result);
+        
+        endTransaction();
+        
+        return result;
+    }
     
 }

@@ -19,4 +19,6 @@ public interface IChoirService {
     
     boolean delete(Long id);
     
+    PersonGroup getChoirById(Long id);
+    
 }

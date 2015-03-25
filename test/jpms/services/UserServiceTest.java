@@ -69,6 +69,7 @@ public class UserServiceTest {
     
     @Test
     public void createUser(){
+        //userService.createUser("M.Elz", "test123");
         boolean shouldBeTrue = userService.createUser("IchbinNeu", "test123");
         Assert.assertTrue(shouldBeTrue);
         
