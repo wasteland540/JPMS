@@ -49,6 +49,7 @@ public class DeleteChoirViewModel extends AbstractBaseViewModel {
         //refresh selected choir, to get actual person list!
         if(selectedChoir != null){
             selectedChoir = choirService.getChoirById(selectedChoir.getId());
+            checkLinkedPersons(selectedChoir);
         }
         
         return selectedChoir;
